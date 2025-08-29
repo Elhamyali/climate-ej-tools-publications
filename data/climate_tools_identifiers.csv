@@ -1,0 +1,31 @@
+Tool,Agency,DOI / Identifier,Public Launch Date,Source,Notes
+Climate and Economic Justice Screening Tool (CEJST),CEQ,"- v1.0 Data: [10.7910/DVN/TPZ0OA] 
+- v1.1 (update, Dec 2024): [10.7910/DVN/B6ULET] 
+- Archived beta (Dec 2022): [10.5281/zenodo.14721707]",2022,"https://screening-tools.com/climate-economic-justice-screening-tool
+
+https://www.axios.com/2022/02/18/biden-climate-justice-screening-tool","Multiple versions preserved via Harvard Dataverse and Zenodo; interface itself has no DOI.
+
+Beta version unveiled in February 2022 under Biden’s Justice40 initiative. Version 2 was released in December 2024"
+EJScreen,EPA,"[10.7910/DVN/RLR5AX] (Harvard Dataverse, v4.0 updated Dec 2024)",2015,"https://www.epa.gov/archive/epa/newsreleases/epa-releases-ejscreen-environmental-justice-screening-and-mapping-tool.html
+
+https://energyhistory.yale.edu/ejscreen-mirror/
+
+https://www.urban.org/sites/default/files/2022-11/Screening%20for%20Environmental%20Justice-%20A%20Framework%20for%20Comparing%20National%2C%20State%2C%20and%20Local%20Data%20Tools.pdf","Covers current and historical EJScreen datasets; prior versions included in record history.
+
+Developed starting in 2010, adopted internally by EPA in 2012, peer-reviewed in 2014, and publicly released in 2015"
+Climate Risk Viewer,USDA Forest Service,None,2023,https://usfs.maps.arcgis.com/home/item.html?id=6829665529404e0ca74f6b08ab2745a5&,"Exists only as ArcGIS Hub tool; no persistent identifier in DataCite/OSTI. Versions tracked internally (beta 2023, v1.1.0 in 2024).
+
+Released in April 2023,"
+Future Risk Index (FRI),FEMA,None,2024,"https://screening-tools.com/fema-future-risk?
+
+https://www.fastcompany.com/91294411/trump-removed-an-online-tool-that-predicts-your-climate-risk-rogue-data-scientists-rebuilt-it?","No DOI issued. Preserved externally by Fulton Ring (GitHub) + Harvard EELP tracker/archive.
+
+Launched in December 2024 and was live until mid-February 2025 when it was removed."
+Environmental Justice Index (EJI),CDC / ATSDR,"- Data file archive (2024 update + 2022 data): [10.5281/zenodo.14675861] 
+- County map series: [10.5281/zenodo.14641818]",2022,"https://www.atsdr.cdc.gov/place-health/media/pdfs/2024/10/EJI-Community-Engagement-Report-508.pdf?
+
+https://eelp.law.harvard.edu/tracker/agency-for-toxic-substances-and-disease-registry-released-environmental-justice-index/?
+
+https://www.healthcaredive.com/news/cdc-hhs-release-environmental-justice-index/629441/?","Archived by EDGI on Zenodo; captures full data + outputs.
+
+EJI was launched in August 2022."
