@@ -1,0 +1,15 @@
+{
+  "hash": "8467ac19a44b3288021262feb24a399e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: How climate and envrionmental justice tools are used in research studies\nauthor:\n  - name: Elham Ali\n    corresponding: true\n    roles:\n      - Researcher\n      - Data Storytelling\n      - Human-centered Design\n      - Data Visualization\n    affiliations:\n      - Public Environmental Data Project\nlicense: CC BY-SA 4.0\nkeywords:\n  - climate change\n  - environmental justice\n  - digital tools\n  - research studies\n  - academic research\ndate: last-modified\nabstract: |\n  TBD\nkeypoints:\n  - climate change\n  - environmental justice\n  - digital tools\n  - research studies\n  - academic research\ncitation:\n  container-title: Public Environmental Data Project\ndraft: false\nbibliography: references.bib\ncode-fold: true\n# reference-location: margin\n# citation-location: margin\necho: true\nwarning: false\n---\n\n## Background\n\nThis analysis looks at TBD.\n\n## Questions\n\nHere are some of the questions I will explore using different datasets:\n\n-   TBD\n-   TBD\n-   TBD\n\n## Data Sources\n\nThe climate tools assessed are:\n\n-   CEQ's Climate and Economic Justice Screening Tool (CEJST)\n-   EPA's EJScreen\n-   USDA Forest Service's Climate Risk Viewer\n-   FEMA's Future Risk Index (FRI)\n-   CDC's Environmental Justice Index (EJI)\n\nThe data for this project comes from:\n\n-   TBD\n-   TBD\n-   TBD\n\nI will reduce each large dataset to focus only on questions related to research studies for these tools. Please find the original raw datasets in the data folder for reference.\n\n## Analysis\n\nI will look at each question one by one and clean the data as I go. Some datasets might need to be combined, so I will organize the data during the analysis before exploring the results.\n\n### Load packages and libraries\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# ## For folder structure\n# library(here)\n# library(ezknitr)\n# \n# ## For data import/cleaning\n# library(tidyverse)\n# library(purrr)\n# library(rlang)\n# library(forcats)\n# library(readxl)\n# \n# ## For graphing\n# library(highcharter)\n# library(igraph)\n# library(RColorBrewer)\n# library(htmlwidgets)\n# library(gt)\n# # library(viridis)\n```\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

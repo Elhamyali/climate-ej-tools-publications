@@ -1,0 +1,28 @@
+project:
+  type: manuscript
+
+manuscript:
+  article: analysis.qmd
+
+execute:
+  freeze: true
+
+format:
+  html:
+    theme: cosmo
+    toc-location: left
+    comments: 
+      hypothesis: true
+    citations-hover: true
+    crossrefs-hover: true
+    title-block-style: manuscript
+    title-block-banner-color: '#edf3f9'
+    repo-actions: [edit, issue]
+    code-fold: false
+    toc: true
+    toc-depth: 5
+    toc_float: true
+    code_folding: hide
+  pdf: default
+  docx: default
+  jats: default

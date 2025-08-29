@@ -1,0 +1,98 @@
+---
+title: How climate and envrionmental justice tools are used in research studies
+author:
+  - name: Elham Ali
+    corresponding: true
+    roles:
+      - Researcher
+      - Data Storytelling
+      - Human-centered Design
+      - Data Visualization
+    affiliations:
+      - Public Environmental Data Project
+license: CC BY-SA 4.0
+keywords:
+  - climate change
+  - environmental justice
+  - digital tools
+  - research studies
+  - academic research
+date: last-modified
+abstract: |
+  TBD
+keypoints:
+  - climate change
+  - environmental justice
+  - digital tools
+  - research studies
+  - academic research
+citation:
+  container-title: Public Environmental Data Project
+draft: false
+bibliography: references.bib
+code-fold: true
+# reference-location: margin
+# citation-location: margin
+echo: true
+warning: false
+---
+
+## Background
+
+This analysis looks at TBD.
+
+## Questions
+
+Here are some of the questions I will explore using different datasets:
+
+-   TBD
+-   TBD
+-   TBD
+
+## Data Sources
+
+The climate tools assessed are:
+
+-   CEQ's Climate and Economic Justice Screening Tool (CEJST)
+-   EPA's EJScreen
+-   USDA Forest Service's Climate Risk Viewer
+-   FEMA's Future Risk Index (FRI)
+-   CDC's Environmental Justice Index (EJI)
+
+The data for this project comes from:
+
+-   TBD
+-   TBD
+-   TBD
+
+I will reduce each large dataset to focus only on questions related to research studies for these tools. Please find the original raw datasets in the data folder for reference.
+
+## Analysis
+
+I will look at each question one by one and clean the data as I go. Some datasets might need to be combined, so I will organize the data during the analysis before exploring the results.
+
+### Load packages and libraries
+
+```{r load-packages-libraries, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: load-packages-libraries
+
+# ## For folder structure
+# library(here)
+# library(ezknitr)
+# 
+# ## For data import/cleaning
+# library(tidyverse)
+# library(purrr)
+# library(rlang)
+# library(forcats)
+# library(readxl)
+# 
+# ## For graphing
+# library(highcharter)
+# library(igraph)
+# library(RColorBrewer)
+# library(htmlwidgets)
+# library(gt)
+# # library(viridis)
+```
+
