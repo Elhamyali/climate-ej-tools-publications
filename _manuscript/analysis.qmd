@@ -418,13 +418,182 @@ df_publishers
 write_csv(df_publishers, here("viz", "top_publishers.csv"))
 ```
 
+#### Stratified random sampling & inter-rater agreement
+
+To answer **Research Questions 2 and 3**, I will work with a collaborator to double-code a subset of research studies. Together, we will manually assign each study to a **topic category** and a **tool use type**. This step establishes **inter-rater agreement** (agreement between coders beyond chance).
+
+For sampling, I am taking **10% of the full dataset (2,170 studies) = 217 studies**. Sampling will be stratified by tool `tool_name`. The entire 217-study subset will be double-coded.
+
+A helpful guide is *Stratified Sampling in R: A Practical Guide with Base R and dplyr* [@sanderson2024].
+
+I considered two allocation approaches:
+
+1.  **Proportional-only allocation** (217 total).
+
+    -   Each tool receives samples proportional to its share of the corpus.
+
+    -   This preserves representativeness but leaves small tools (e.g., CRV, FRI) with too few cases to analyze.
+
+    -   Example distribution: EJScreen = 124, CEJST = 79, EJI = 11, CRV = 2, FRI = 1.
+
+2.  **Proportional with a minimum floor** (217 total, MIN = 10).
+
+    -   Every tool gets at least 10 studies (or all available, if fewer).
+
+    -   Larger tools (EJScreen, CEJST) give up a small number of cases to make room.
+
+    -   Final distribution: EJScreen = 109, CEJST = 73, EJI = 18, CRV = 11, FRI = 6.
+
+I chose the **minimum floor approach**, since it ensures smaller tools are represented enough for meaningful analysis and coder agreement checks.
+
+**Tradeoff:**
+
+-   *Proportional-only*: best if the goal is a population-level snapshot but leaves tiny strata nearly invisible.
+
+-   *Floor allocation*: best if we need to compare across tools.
+
+```{r}
+set.seed(2025)
+
+# Load the dataset
+all_tools <- readRDS(here("output", "all_tools.rds")) %>%
+  janitor::clean_names() %>%
+  mutate(
+    year = as.integer(year),
+    study_id = dplyr::row_number()
+  )
+
+# Parameters
+TOTAL <- nrow(all_tools)               # should be 2170
+SAMPLE_TOTAL <- ceiling(TOTAL * 0.10)  # 10% => 217
+MIN_PER_TOOL <- 10                     # floor per tool
+EXPAND_TOTAL <- TRUE                   # expand total if needed
+
+# --------------------------------------------------------------------
+# Allocation with per-tool minimums, then proportional distribution
+# --------------------------------------------------------------------
+tool_counts <- all_tools %>%
+  count(tool_name, name = "n_tool") %>%
+  arrange(desc(n_tool))
+
+# Floors (min 10, capped at availability)
+floor_alloc <- tool_counts %>%
+  mutate(floor = pmin(n_tool, MIN_PER_TOOL))
+
+reserved <- sum(floor_alloc$floor)
+
+if (reserved > SAMPLE_TOTAL) {
+  if (EXPAND_TOTAL) {
+    SAMPLE_TOTAL <- reserved
+  } else {
+    stop("Minimum per-tool exceeds total sample. Lower MIN_PER_TOOL or allow expand.")
+  }
+}
+
+remaining <- SAMPLE_TOTAL - reserved
+
+# Proportional extras after floors
+alloc <- floor_alloc %>%
+  mutate(capacity = pmax(0, n_tool - floor))
+
+if (remaining > 0 && sum(alloc$capacity) > 0) {
+  alloc <- alloc %>%
+    mutate(
+      weight     = capacity / sum(capacity),
+      extra_raw  = remaining * weight,
+      extra_base = floor(extra_raw),
+      remainder  = extra_raw - extra_base
+    )
+  leftover <- remaining - sum(alloc$extra_base)
+  alloc <- alloc %>%
+    arrange(desc(remainder)) %>%
+    mutate(extra = extra_base + if_else(row_number() <= leftover, 1L, 0L)) %>%
+    arrange(desc(n_tool))
+} else {
+  alloc <- alloc %>% mutate(extra = 0L)
+}
+
+# Final allocation
+alloc <- alloc %>%
+  mutate(alloc = pmin(n_tool, floor + extra))
+
+tool_alloc <- alloc %>%
+  select(tool_name, n_tool, alloc)
+
+stopifnot(sum(tool_alloc$alloc) == SAMPLE_TOTAL)
+
+# --------------------------------------------------------------------
+# Stratified random sample
+# --------------------------------------------------------------------
+orig_cols <- names(all_tools)
+
+sample_primary <- all_tools %>%
+  inner_join(tool_alloc, by = "tool_name") %>%
+  group_by(tool_name) %>%
+  group_modify(~ dplyr::slice_sample(.x, n = unique(.x$alloc))) %>%
+  ungroup() %>%
+  mutate(
+    double_code   = TRUE,
+    topic_cat     = NA_character_,
+    tool_use_type = NA_character_
+  ) %>%
+  select(all_of(orig_cols), double_code, topic_cat, tool_use_type)
+
+stopifnot(nrow(sample_primary) == SAMPLE_TOTAL)
+
+# --------------------------------------------------------------------
+# Save outputs (to output/ folder)
+# --------------------------------------------------------------------
+sample_primary %>% count(tool_name) %>% arrange(desc(n)) %>% print()
+
+readr::write_csv(tool_alloc,     here("output", "alloc_with_min_floor.csv"))
+readr::write_csv(sample_primary, here("output", "double_code_sample.csv"))
+
+```
+
+To support manual coding, I drafted an early codebook with candidate topic and tool use categories. Definitions, inclusion/exclusion criteria, and examples will be added as the coding scheme is refined.
+
+```{r}
+# Starter codebook for manual coding
+topic_levels <- c(
+  "Air quality / pollution",
+  "Health impacts",
+  "Extreme heat / climate risk",
+  "Transportation",
+  "Land use / housing",
+  "Energy / utilities",
+  "Water / flooding",
+  "Equity / policy & governance"
+)
+
+tool_use_levels <- c(
+  "Applied (used for analysis/targeting)",
+  "Evaluated (validated/benchmarked the tool)",
+  "Critiqued (limitations/methodological critique)",
+  "Mentioned/Context (not used for analysis)"
+)
+
+codebook <- tibble::tibble(
+  variable   = c(rep("topic_cat", length(topic_levels)),
+                 rep("tool_use_type", length(tool_use_levels))),
+  code       = c(topic_levels, tool_use_levels),
+  definition = NA_character_,   # fill in
+  include_if = NA_character_,   # fill in
+  exclude_if = NA_character_,   # fill in
+  examples   = NA_character_    # fill in small examples/keywords
+)
+
+readr::write_csv(codebook, here("output", "codebook_topic_tool_use.csv"))
+```
+
 ### Research question 2
 
 What research topics are associated with each tool, and how do these topics vary by citation frequency?
 
-To answer this question, I will work with a collaborator to "code" all of the research studies manually and to categorize them into topics. Before we do that, I'
-
+Coming soon!
 
 ### Research question 3
 
 In what ways are these tools applied in research?
+
+Coming soon!

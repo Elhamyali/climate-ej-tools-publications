@@ -1,0 +1,13 @@
+variable,code,definition,include_if,exclude_if,examples
+topic_cat,Air quality / pollution,NA,NA,NA,NA
+topic_cat,Health impacts,NA,NA,NA,NA
+topic_cat,Extreme heat / climate risk,NA,NA,NA,NA
+topic_cat,Transportation,NA,NA,NA,NA
+topic_cat,Land use / housing,NA,NA,NA,NA
+topic_cat,Energy / utilities,NA,NA,NA,NA
+topic_cat,Water / flooding,NA,NA,NA,NA
+topic_cat,Equity / policy & governance,NA,NA,NA,NA
+tool_use_type,Applied (used for analysis/targeting),NA,NA,NA,NA
+tool_use_type,Evaluated (validated/benchmarked the tool),NA,NA,NA,NA
+tool_use_type,Critiqued (limitations/methodological critique),NA,NA,NA,NA
+tool_use_type,Mentioned/Context (not used for analysis),NA,NA,NA,NA
