@@ -403,20 +403,33 @@ write_csv(df_avg_cpy, here("viz", "avg_cites_per_year_over_time.csv"))
 
 #### Publishers
 
-Which publishers/platforms appear most frequently?
+Which top 10 publishers/platforms appear most frequently?
 
 ```{r descriptive-stat-7, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: descriptive-stat-7
 
-df_publishers <- all_tools %>%
+df_10_publishers <- all_tools %>%
   filter(publisher != "") %>%
   count(publisher, sort = TRUE) %>%
   slice_head(n = 10)
 
-df_publishers
+df_10_publishers
 
-write_csv(df_publishers, here("viz", "top_publishers.csv"))
+write_csv(df_10_publishers, here("viz", "top_publishers.csv"))
 ```
+
+List all publishers from the sample.
+
+```{r descriptive-stat-8, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-8
+
+df_all_publishers <- all_tools %>%
+  filter(publisher != "") %>%
+  count(publisher, sort = TRUE)
+
+write_csv(df_all_publishers, here("viz", "all_publishers.csv"))
+```
+
 
 #### Stratified random sampling & inter-rater agreement
 
@@ -442,7 +455,7 @@ I considered two allocation approaches:
 
     -   Larger tools (EJScreen, CEJST) give up a small number of cases to make room.
 
-    -   Final distribution: EJScreen = 109, CEJST = 73, EJI = 18, CRV = 11, FRI = 6.
+    -   Final distribution: EJScreen = 81, CEJST = 72, EJI = 18, CRV = 11, FRI = 6.
 
 I chose the **minimum floor approach**, since it ensures smaller tools are represented enough for meaningful analysis and coder agreement checks.
 
