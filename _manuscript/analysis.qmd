@@ -75,6 +75,7 @@ I start by loading the packages needed for file handling, data wrangling, and vi
 
 ## Folder structure helpers
 library(here)
+library(readr)
 library(ezknitr)
 
 ## Data import & cleaning
@@ -82,7 +83,9 @@ library(tidyverse)
 library(janitor)
 library(lubridate)
 library(janitor)
-# library(rlang)
+library(stringr)
+library(forcats)
+library(vcd)
 
 ## Visualization
 library(highcharter)
@@ -459,7 +462,7 @@ As McHugh (2012) explains, *“the squaring of kappa translates conceptually to 
 |    .80–.90     |       Strong       |            64–81%            |
 |    Above.90    |   Almost Perfect   |           82–100%            |
 
-A good resource that I'm following for IRA is *Cohen’s Kappa in R: For Two Categorical Variables* [@datanovia2025].
+A good resource that I'm following for IRA is *Cohen’s Kappa in R: For Two Categorical Variables* [@datanovia2025]. Another is the *agreement package:* <https://github.com/jmgirard/agreement>.
 
 #### **1. Publisher-level data**
 
@@ -468,7 +471,7 @@ Cohen’s κ = 0.89 (95 % CI \[0.79, 0.99\], p \< 0.001) indicates **almost perf
 Here's how to read the results table:
 
 | Metric | Value | Interpretation |
-|---------------------|------------------|----------------------------------|
+|---------------------|-------------------|---------------------------------|
 | **Percent agreement** | `0.909` (≈ 91%) | Raw proportion of identical ratings — shows high agreement overall |
 | **Unweighted Cohen’s κ** | `0.8935` | Agreement beyond chance |
 | **Weighted Cohen’s κ** | `0.8602` | Takes into account partial agreement (useful for *ordinal* data — not critical here) |
@@ -477,16 +480,14 @@ Here's how to read the results table:
 | **p-value** | `4.78 × 10⁻⁷⁰` | Extremely small → reject H₀; the raters’ agreement is highly significant |
 | **95% CI (Unweighted)** | 0.79 – 0.99 | Even the lower bound (0.79) indicates strong agreement |
 
+**Note on sample size for inter-rater agreement** Although the full dataset (`all_publishers_ira.csv`) contains 387 records, only the first 44 rows were double-coded by both raters (11% of the sample).
+
+The remaining rows include missing or unassigned categories for at least one rater. Because `table()` in R automatically excludes `NA` values when computing cross-tabulations, the Cohen’s Kappa and percent agreement calculations below are effectively based on those 44 complete cases.
+
+So, this code can be reused with any dataset of similar structure without needing to hardcode a row range. The computation will always use only non-missing, valid pairs of rater classifications.
+
 ```{r publisher-ira-calculation, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: publisher-ira-calculation
-
-# Packages
-library(here)
-library(readr)
-library(dplyr)
-library(stringr)
-library(forcats)
-library(vcd)
 
 # Import publisher file
 all_publishers_ira <- readr::read_csv(
@@ -526,29 +527,24 @@ all_publishers_ira <- all_publishers_ira |>
     pub_type_rater_2 = factor(pub_type_rater_2, levels = kappa_levels)
   )
 
-# --- Use only rows 1–44 and save to 05_cleaned_datasets ---
-stopifnot(nrow(all_publishers_ira) >= 44)
+# Use to check for the recoding results
+# table(all_publishers_ira$pub_type_rater_1, useNA = "ifany")
+# table(all_publishers_ira$pub_type_rater_2, useNA = "ifany")
 
-ira_subset <- all_publishers_ira %>%
-  slice(1:44) %>%
-  filter(!is.na(pub_type_rater_1), !is.na(pub_type_rater_2))
-
-out_dir <- here::here("05_cleaned_datasets")
-if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
-saveRDS(ira_subset, file.path(out_dir, "all_publishers_ira_rows1_44.rds"))
-
-# --- Calculate Cohen’s Kappa on subset ---
+# Build contingency table and compute Cohen's Kappa
+# (Unweighted Kappa corresponds to Cohen’s kappa for two raters)
 tab_10x10 <- table(
-  Rater1 = ira_subset$pub_type_rater_1,
-  Rater2 = ira_subset$pub_type_rater_2
+  Rater1 = all_publishers_ira$pub_type_rater_1,
+  Rater2 = all_publishers_ira$pub_type_rater_2
 )
 
 kappa_res <- vcd::Kappa(tab_10x10)
+
 kappa_res
 confint(kappa_res)
 
-# Simple percent agreement
-percent_agreement <- mean(ira_subset$pub_type_rater_1 == ira_subset$pub_type_rater_2)
+# Simple percent agreement for context
+percent_agreement <- mean(all_publishers_ira$pub_type_rater_1 == all_publishers_ira$pub_type_rater_2, na.rm = TRUE)
 percent_agreement
 ```
 
@@ -556,9 +552,110 @@ percent_agreement
 
 ```{r studies-ira-calculation, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: studies-ira-calculation
-```
 
-#### 
+# Import publisher file
+sample_studies_ira <- readr::read_csv(
+  here::here("02_processed_data", "double_code_sample_ira.csv"),
+  show_col_types = FALSE,
+  na = c("", "NA", "N/A", "NULL")
+)
+
+# Enforce types ONLY for IRA-relavent variables
+sample_studies_ira <- sample_studies_ira %>%
+  mutate(
+    topic_cat_rater_1      = as.character(topic_cat_rater_1),
+    topic_cat_rater_2      = as.character(topic_cat_rater_2),
+    tool_use_type_rater_1  = as.character(tool_use_type_rater_1),
+    tool_use_type_rater_2  = as.character(tool_use_type_rater_2)
+  )
+
+# Define factor levels
+topic_levels <- c(
+  "Air quality & pollution",
+  "Health & well-being",
+  "Climate hazards & risks",
+  "Transit, mobility & transportation",
+  "Land use, housing & built environment infrastructure",
+  "Energy & decarbonization",
+  "Water resources & flooding",
+  "Natural environment, resources & ecosystems",
+  "Governance, policy & institutional frameworks",
+  "Equity and justice",
+  "Economy, labor & development",
+  "Community engagement & knowledge",
+  "Other"
+)
+
+tool_use_levels <- c(
+  "Applied",
+  "Evaluated",
+  "Critiqued",
+  "Mentioned/Context",
+  "None"
+)
+
+# Apply factor levels
+sample_studies_ira <- sample_studies_ira %>%
+  mutate(
+    topic_cat_rater_1     = factor(topic_cat_rater_1,     levels = topic_levels),
+    topic_cat_rater_2     = factor(topic_cat_rater_2,     levels = topic_levels),
+    tool_use_type_rater_1 = factor(tool_use_type_rater_1, levels = tool_use_levels),
+    tool_use_type_rater_2 = factor(tool_use_type_rater_2, levels = tool_use_levels)
+  )
+
+# Compute Cohen's kappa for TOPIC
+tab_topic <- table(
+  Rater1 = sample_studies_ira$topic_cat_rater_1,
+  Rater2 = sample_studies_ira$topic_cat_rater_2
+)
+kappa_topic <- vcd::Kappa(tab_topic)
+pa_topic <- mean(
+  sample_studies_ira$topic_cat_rater_1 == sample_studies_ira$topic_cat_rater_2,
+  na.rm = TRUE
+)
+
+# Compute Cohen's kappa for TOOL USE TYP
+tab_tool <- table(
+  Rater1 = sample_studies_ira$tool_use_type_rater_1,
+  Rater2 = sample_studies_ira$tool_use_type_rater_2
+)
+kappa_tool <- vcd::Kappa(tab_tool)
+pa_tool <- mean(
+  sample_studies_ira$tool_use_type_rater_1 == sample_studies_ira$tool_use_type_rater_2,
+  na.rm = TRUE
+)
+
+# Simple percent agreement for TOPIC
+percent_agreement_topic <- mean(
+  sample_studies_ira$topic_cat_rater_1 == sample_studies_ira$topic_cat_rater_2,
+  na.rm = TRUE
+)
+percent_agreement_topic
+
+# Simple percent agreement for TOOL USE TYPE
+percent_agreement_tool <- mean(
+  sample_studies_ira$tool_use_type_rater_1 == sample_studies_ira$tool_use_type_rater_2,
+  na.rm = TRUE
+)
+percent_agreement_tool
+
+# Print key outputs
+kappa_topic
+confint(kappa_topic)
+pa_topic
+
+kappa_tool
+confint(kappa_tool)
+pa_tool
+
+summary_tbl <- tibble::tibble(
+  variable          = c("topic_cat", "tool_use_type"),
+  kappa_unweighted  = c(kappa_topic$Unweighted["value"], kappa_tool$Unweighted["value"]),
+  kappa_weighted    = c(kappa_topic$Weighted["value"],   kappa_tool$Weighted["value"]),
+  percent_agreement = c(percent_agreement_topic, percent_agreement_tool)
+)
+summary_tbl
+```
 
 ### Research questions
 

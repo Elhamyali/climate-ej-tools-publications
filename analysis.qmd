@@ -466,7 +466,7 @@ A good resource that I'm following for IRA is *Cohen’s Kappa in R: For Two Cat
 
 #### **1. Publisher-level data**
 
-Cohen’s κ = 0.89 (95 % CI \[0.79, 0.99\], p \< 0.001) indicates **almost perfect agreement** between the two raters according to McHugh (2012). The raw percent agreement was 91 %, which higlights strong consistency between raters in categorizing publisher types.
+Cohen’s κ = 0.89 (95 % CI \[0.79, 0.99\], p \< 0.001) indicates **almost perfect agreement** between the two raters according to McHugh (2012). The raw percent agreement was 91 %.
 
 Here's how to read the results table:
 
@@ -550,17 +550,115 @@ percent_agreement
 
 #### **2. Study-level data**
 
+For the **topic category coding**, Cohen’s κ = 0.32 (95 % CI \[0.24, 0.39\], *p* \< 0.001) indicates **minimal agreement** between the two raters according to McHugh (2012). The raw percent agreement was **39%**.
+
+For the **tool-use type coding**, Cohen’s κ = 0.16 (95 % CI \[0.09, 0.22\], *p* \< 0.001) reflects **no agreement** between raters. The raw percent agreement was **32%**.
+
 ```{r studies-ira-calculation, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: studies-ira-calculation
 
+# Import publisher file
+sample_studies_ira <- readr::read_csv(
+  here::here("02_processed_data", "double_code_sample_ira.csv"),
+  show_col_types = FALSE,
+  na = c("", "NA", "N/A", "NULL")
+)
 
-# # Packages
-# library(here)
-# library(readr)
-# library(dplyr)
-# library(stringr)
-# library(forcats)
-# library(vcd)
+# Enforce types ONLY for IRA-relavent variables
+sample_studies_ira <- sample_studies_ira %>%
+  mutate(
+    topic_cat_rater_1      = as.character(topic_cat_rater_1),
+    topic_cat_rater_2      = as.character(topic_cat_rater_2),
+    tool_use_type_rater_1  = as.character(tool_use_type_rater_1),
+    tool_use_type_rater_2  = as.character(tool_use_type_rater_2)
+  )
+
+# Define factor levels
+topic_levels <- c(
+  "Air quality & pollution",
+  "Health & well-being",
+  "Climate hazards & risks",
+  "Transit, mobility & transportation",
+  "Land use, housing & built environment infrastructure",
+  "Energy & decarbonization",
+  "Water resources & flooding",
+  "Natural environment, resources & ecosystems",
+  "Governance, policy & institutional frameworks",
+  "Equity and justice",
+  "Economy, labor & development",
+  "Community engagement & knowledge",
+  "Other"
+)
+
+tool_use_levels <- c(
+  "Applied",
+  "Evaluated",
+  "Critiqued",
+  "Mentioned/Context",
+  "None"
+)
+
+# Apply factor levels
+sample_studies_ira <- sample_studies_ira %>%
+  mutate(
+    topic_cat_rater_1     = factor(topic_cat_rater_1,     levels = topic_levels),
+    topic_cat_rater_2     = factor(topic_cat_rater_2,     levels = topic_levels),
+    tool_use_type_rater_1 = factor(tool_use_type_rater_1, levels = tool_use_levels),
+    tool_use_type_rater_2 = factor(tool_use_type_rater_2, levels = tool_use_levels)
+  )
+
+# Compute Cohen's kappa for TOPIC
+tab_topic <- table(
+  Rater1 = sample_studies_ira$topic_cat_rater_1,
+  Rater2 = sample_studies_ira$topic_cat_rater_2
+)
+kappa_topic <- vcd::Kappa(tab_topic)
+pa_topic <- mean(
+  sample_studies_ira$topic_cat_rater_1 == sample_studies_ira$topic_cat_rater_2,
+  na.rm = TRUE
+)
+
+# Compute Cohen's kappa for TOOL USE TYP
+tab_tool <- table(
+  Rater1 = sample_studies_ira$tool_use_type_rater_1,
+  Rater2 = sample_studies_ira$tool_use_type_rater_2
+)
+kappa_tool <- vcd::Kappa(tab_tool)
+pa_tool <- mean(
+  sample_studies_ira$tool_use_type_rater_1 == sample_studies_ira$tool_use_type_rater_2,
+  na.rm = TRUE
+)
+
+# Simple percent agreement for TOPIC
+percent_agreement_topic <- mean(
+  sample_studies_ira$topic_cat_rater_1 == sample_studies_ira$topic_cat_rater_2,
+  na.rm = TRUE
+)
+percent_agreement_topic
+
+# Simple percent agreement for TOOL USE TYPE
+percent_agreement_tool <- mean(
+  sample_studies_ira$tool_use_type_rater_1 == sample_studies_ira$tool_use_type_rater_2,
+  na.rm = TRUE
+)
+percent_agreement_tool
+
+# Print key outputs
+kappa_topic
+confint(kappa_topic)
+pa_topic
+
+kappa_tool
+confint(kappa_tool)
+pa_tool
+
+summary_tbl <- tibble::tibble(
+  variable          = c("topic_cat", "tool_use_type"),
+  kappa_unweighted  = c(kappa_topic$Unweighted["value"], kappa_tool$Unweighted["value"]),
+  kappa_weighted    = c(kappa_topic$Weighted["value"],   kappa_tool$Weighted["value"]),
+  percent_agreement = c(percent_agreement_topic, percent_agreement_tool)
+)
+summary_tbl
 ```
 
 ### Research questions
