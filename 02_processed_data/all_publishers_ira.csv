@@ -1,0 +1,388 @@
+publisher,n,pub_type_rater_1,pub_type_rater_2,description
+escholarship.org,36,University / institutional repositories,University presses,"eScholarship is the University of California’s institutional repository (hosts theses, articles, reports)."
+journals.uchicago.edu,10,University / institutional repositories,University presses,University of Chicago Press is the academic press of the University of Chicago.
+cambridge.org,7,University presses,University presses,Cambridge University Press is the university press of the University of Cambridge.
+iopscience.iop.org,35,Scholarly society / association publishers,Scholarly society / association publishers,IOPscience is operated by the Institute of Physics (a learned society) as its publishing arm.
+ascelibrary.org,15,Scholarly society / association publishers,Scholarly society / association publishers,American Society of Civil Engineers is a professional society that publishes civil engineering journals.
+jacionline.org,3,Commercial academic publishers,Scholarly society / association publishers,"The Journal of Allergy and Clinical Immunology is published by Elsevier, a for-profit academic publisher ."
+psycnet.apa.org,3,Scholarly society / association publishers,Scholarly society / association publishers,APA PsycNet is the platform for American Psychological Association publications
+papers.ssrn.com,61,Preprint / working paper servers,Preprint / working paper servers,SSRN is an open-access repository for early-stage research/preprints in social sciences.
+biorxiv.org,2,Preprint / working paper servers,Preprint / working paper servers,bioRxiv is an open preprint server for biology (Cold Spring Harbor Lab) where researchers post manuscripts prior to peer review.
+mdpi.com,42,Open access publishers,Open access publishers,"MDPI is an open-access publisher, all journals OA via APCs."
+frontiersin.org,34,Open access publishers,Open access publishers,Frontiers Media SA is a nonprofit open-access publisher of peer-reviewed scientific journals.
+journals.plos.org,7,Open access publishers,Open access publishers,PLOS (Public Library of Science) is a nonprofit open-access publisher of scientific journals.
+Scientific Research Publishing,4,Open access publishers,Open access publishers,SCIRP – publisher of 200+ open-access journals
+HeinOnline,127,Legal / policy databases,Legal / policy databases,HeinOnline is a subscription-based online legal research database specializing in law journals and government documents
+JSTOR,25,Grey literature platforms,Grey literature platforms,"JSTOR (part of non-profit ITHAKA) is a digital library/archive of scholarly journals and books. Digital library/aggregator, not the original publisher."
+books.google.com,25,Grey literature platforms,Grey literature platforms,Google Books aggregator/scans; identify original publisher if possible.
+researchgate.net,17,Grey literature platforms,Grey literature platforms,ResearchGate is a commercial academic social network (not a publisher); it hosts author-uploaded papers.
+upload.wikimedia.org,7,Grey literature platforms,Grey literature platforms,Wikimedia Commons is a free media file repository of public-domain and open-license educational content.
+rff.org,6,Grey literature platforms,Grey literature platforms,RFF is an independent nonprofit environmental economics research institute (think tank).
+ingentaconnect.com,4,Grey literature platforms,Grey literature platforms,"Ingenta Connect is a content hosting platform for scholarly publications (not an original publisher). It hosts over 5 million articles and 16,000 publications from ~140 publishers"
+core.ac.uk,4,Grey literature platforms,Grey literature platforms,Aggregator for open-access repository content (not original publisher).
+osti.gov,138,Government repositories,Government repositories,OSTI.gov is the U.S. DOE Office of Scientific and Technical Information repository.
+rosap.ntl.bts.gov,40,Government repositories,Government repositories,ROSAP is the National Transportation Library’s Repository & Open Science Access Portal (U.S. DOT).
+ntrs.nasa.gov,14,Government repositories,Government repositories,NASA’s Technical Reports Server (NTRS) is a U.S. government open access repository for NASA-funded research
+ehp.niehs.nih.gov,13,Government repositories,Government repositories,Environmental Health Perspectives is an open-access journal published by the U.S. NIH/NIEHS (government-supported)
+pmc.ncbi.nlm.nih.gov,12,Government repositories,Government repositories,Government-hosted domain; repository or agency publisher.
+repository.library.noaa.gov,11,Government repositories,Government repositories,NOAA’s library repository provides access to NOAA scientific reports and publications.
+epa.gov,6,Government repositories,Government repositories,The U.S. Environmental Protection Agency is a federal government agency; its site provides access to environmental research (official .gov site).
+research.fs.usda.gov,6,Government repositories,Government repositories,The USDA Forest Service (a federal agency) site provides access to Forest Service research (government publications).
+search.proquest.com,212,University / institutional repositories,University / institutional repositories,"ProQuest is a global information-content company providing subscription-based access to academic databases, dissertations, and journals."
+digitalcommons.mtech.edu,6,University / institutional repositories,University / institutional repositories,Digital Commons @ Montana Tech is the university library’s open-access repository of faculty and student work
+digitalcommons.unl.edu,6,University / institutional repositories,University / institutional repositories,DigitalCommons@Nebraska-Lincoln is UNL’s institutional repository of scholarly content.
+scholarworks.umt.edu,4,University / institutional repositories,University / institutional repositories,"ScholarWorks at University of Montana is an institutional repository (hosted via Digital Commons) that archives and provides access to UMT faculty and student scholarship, including theses and dissertations"
+scholarworks.umass.edu,3,University / institutional repositories,University / institutional repositories,"Institutional repository archiving theses, dissertations, and faculty outputs. (https://scholarworks.umass.edu)"
+catalysis.eprints.iitm.ac.in,3,Grey literature platforms,University / institutional repositories,"The National Centre for Catalysis Research (NCCR) is at the Indian Institute of Technology–Madras. While many U.S.-based academic centers are classified as grey literature because they primarily release reports and policy briefs, IIT Madras’s NCCR functions as a formal research center that also archives theses and peer-reviewed publications. For this reason, we categorized it as a Dissertations & theses repository rather than a grey literature platform."
+conservancy.umn.edu,3,University / institutional repositories,University / institutional repositories,"The University of Minnesota’s Digital Conservancy is the institutional repository for UMN. It provides long-term, open access to faculty publications and student works (including dissertations and theses) as part of the library’s mission to preserve scholarly output"
+Elsevier,118,Commercial academic publishers,Commercial academic publishers,For-profit multinational academic publisher.
+Springer,88,Commercial academic publishers,Commercial academic publishers,Springer Nature is a global for-profit academic publisher. Part of Springer Nature; commercial scholarly publisher.
+Taylor &Francis,58,Commercial academic publishers,Commercial academic publishers,For-profit academic publisher of journals and books.
+liebertpub.com,53,Commercial academic publishers,Commercial academic publishers,"Mary Ann Liebert, Inc. is a scientific journal publisher (now part of Sage)."
+Wiley Online Library,46,Commercial academic publishers,Commercial academic publishers,Wiley is a for-profit global academic publisher.
+journals.sagepub.com,33,Commercial academic publishers,Commercial academic publishers,SAGE Publications is an independent international academic publisher.
+nature.com,29,Commercial academic publishers,Commercial academic publishers,Nature Portfolio (Springer Nature); commercial scholarly publisher.
+thieme-connect.com,3,Commercial academic publishers,Commercial academic publishers,"Thieme Connect is the online platform of Thieme Medical Publishers, a global for-profit publisher of academic journals and books"
+urban.org,19,Grey literature platforms,,Urban Institute is a nonprofit policy research organization (think tank) producing reports; not a formal publisher.
+deepblue.lib.umich.edu,18,University / institutional repositories,,"University of Michigan library: ""Our repositories give you safe and permanent access to the work that makes the University of Michigan a leader in research, teaching, learning, and creativity, whether that work is in the form of documents or data."""
+academic.oup.com,18,University presses,,Oxford University Press is the publishing house of the University of Oxford (the world’s largest university press).
+ACS Publications,17,Scholarly society / association publishers,,ASCE Library – journals of American Society of Civil Engineers.
+ui.adsabs.harvard.edu,14,Scholarly society / association publishers,,SAO/NASA Astrophysics Data System (ADS) is a NASA-funded digital library for astronomy/physics papers.
+taylorfrancis.com,13,Commercial academic publishers,,Taylor & Francis Group is an international company originating in the United Kingdom that publishes books and academic journals.
+dukespace.lib.duke.edu,12,University / institutional repositories,,"DukeSpace: publications, theses, and dissertations by Duke faculty and students. Theses and dissertations are a secondary type."
+peer.asee.org,11,Scholarly society / association publishers,,ASEE (American Society for Engineering Education) is a non-profit society for engineering education that publishes conference proceedings/journals.
+ieeexplore.ieee.org,11,Scholarly society / association publishers,,IEEE (Institute of Electrical and Electronics Engineers) is a professional association
+search.ebscohost.com,10,Commercial academic publishers,,EBSCOhost is a for-profit provider of subscription research databases for libraries.
+repositories.lib.utexas.edu,10,University / institutional repositories,,Texas ScholarWorks is UT Austin’s institutional repository of faculty publications
+ir.library.oregonstate.edu,8,University / institutional repositories,,ScholarsArchive@OSU is Oregon State University’s open-access institutional repository.
+vtechworks.lib.vt.edu,8,University / institutional repositories,,"VTechWorks is Virginia Tech’s open-access repository of scholarship (articles, theses, reports)"
+jamanetwork.com,8,Scholarly society / association publishers,,JAMA Network is a consortium of peer-reviewed medical journals published by the American Medical Association (AMA). 
+journals.lww.com,7,Commercial academic publishers,,"LWW (Lippincott Williams & Wilkins) is an imprint of Wolters Kluwer, a commercial medical publisher"
+ideals.illinois.edu,7,University / institutional repositories,,IDEALS is the University of Illinois’s institutional repository of research outputs.
+arxiv.org,7,Preprint / working paper servers,,"arXiv is a free open-access archive for preprints in physics, math, CS, etc.."
+essopenarchive.org,6,Preprint / working paper servers,,The ESS Open Archive (formerly ESSOAr) is a community-run preprint server for Earth and environmental sciences.
+minds.wisconsin.edu,6,University / institutional repositories,,MINDS@UW is University of Wisconsin–Madison’s open-access institutional repository.
+direct.mit.edu,6,University presses,,The MIT Press is the university press of MIT.
+pnas.org,6,Scholarly society / association publishers,,PNAS (Proceedings of the National Academy of Sciences) is published by the U.S. National Academy of Sciences (a learned society).
+atsjournals.org,6,Scholarly society / association publishers,,American Thoracic Society is a medical society (Pulmonary medicine) that publishes ATS journals.
+library.oapen.org,6,Open access publishers,,OAPEN is an online library of peer-reviewed open-access academic books (nonprofit infrastructure).
+aceee.org,6,Grey literature platforms,,"ACEEE is the American Council for an Energy-Efficient Economy, a nonprofit energy-policy research organization."
+ncbi.nlm.nih.gov,5,Government repositories,,"NCBI (e.g., PubMed Central) run by U.S. NIH (government)."
+annualreviews.org,5,Commercial academic publishers,,Annual Reviews is a nonprofit publisher of peer-reviewed review journals (some content open access).
+go.gale.com,5,Grey literature platforms,,Gale/Cengage academic database (aggregator)
+cdr.lib.unc.edu,5,University / institutional repositories,,"UNC’s Carolina Digital Repository (theses, etc.)"
+ahajournals.org,5,Scholarly society / association publishers,,American Heart Association (nonprofit) publishes AHA journals (e.g. Circulation) – a professional medical society.
+meridian.allenpress.com,5,Scholarly society / association publishers,,Allen Press Meridian platform (hosts society journals)
+law.berkeley.edu,5,Legal / policy databases,,Berkeley Law scholarship/working papers (institutional content).
+academiccommons.columbia.edu,5,University / institutional repositories,,Academic Commons is Columbia University’s open-access repository of faculty research.
+scholarscompass.vcu.edu,5,University / institutional repositories,,VCU institutional repository (Digital Commons).
+dspace.mit.edu,4,University / institutional repositories,,MIT DSpace institutional repository.
+cell.com,4,Commercial academic publishers,,Cell Press (Elsevier); commercial scholarly publisher.
+digitalcommons.humboldt.edu,4,University / institutional repositories,,Cal Poly Humboldt Digital Commons (theses/projects).
+jscholarship.library.jhu.edu,4,University / institutional repositories,,"JScholarship is Johns Hopkins University’s institutional repository for scholarly works. Managed by the library, it preserves and provides open access to JHU research outputs, including theses and dissertations"
+repository.gatech.edu,4,University / institutional repositories,,"Georgia Tech’s institutional repository (GT Digital Repository) openly archives and preserves theses, dissertations, and other research produced at Georgia Tech"
+wri.org,4,Grey literature platforms,,The World Resources Institute (WRI) is a nonprofit research organization that publishes data-driven reports and policy briefs on environmental and development issues (grey literature)
+bren.ucsb.edu,4,University / institutional repositories,,Institutional site (UCSB Bren School); reports/working papers.
+thelancet.com,4,Commercial academic publishers,,"The Lancet is a leading medical journal (founded 1823) published by Elsevier, a for-profit academic publisher, since 1991"
+wyoscholar.uwyo.edu,4,University / institutional repositories,,"WyoScholar is the University of Wyoming’s open-access institutional repository. It hosts UW graduate and undergraduate papers, theses, dissertations, faculty publications, and other collections"
+aacrjournals.org,4,Scholarly society / association publishers,,American Association for Cancer Research journals (society publisher).
+ageconsearch.umn.edu,4,Preprint / working paper servers,,Disciplinary repository for working papers & reports in agricultural/applied economics.
+ajph.aphapublications.org,4,Scholarly society / association publishers,,American Public Health Association (AJPH) society journal.
+apha.confex.com,4,Scholarly society / association publishers,,APHA conference abstracts/proceedings (society).
+authorea.com,4,Preprint / working paper servers,,Preprint/authoring platform; early-stage manuscripts.
+par.nsf.gov,4,Government repositories,,"This is the NSF Public Access Repository (NSF-PAR), a government-run portal for disseminating results of NSF-funded research. It contains peer-reviewed manuscripts and journal publications as required by the NSF Public Access policy"
+accesswater.org,3,Scholarly society / association publishers,,"Access Water is the Water Environment Federation’s online platform for technical publications. WEF (a professional association in water management) uses AccessWater to publish manuals of practice, conference papers, technical reports, etc., for the water sector"
+scholarworks.calstate.edu,3,University / institutional repositories,,"Institutional repository archiving theses, dissertations, and faculty outputs. (https://scholarworks.calstate.edu)"
+iwaponline.com,3,Scholarly society / association publishers,,"IWA Publishing is the publishing arm of the International Water Association, producing peer-reviewed journals and books in water science and technology ."
+intechopen.com,3,Preprint / working paper servers,,"EarthArXiv is an open-access preprint server for Earth and planetary sciences. It hosts preprints (unpeer-reviewed scholarly papers) in all Earth science domains, allowing rapid, free dissemination of research prior to journal publication"
+nicholasinstitute.duke.edu,3,Grey literature platforms,,Duke University’s Nicholas Institute is an applied environmental research center; its website provides research reports and briefs 
+media.rff.org,3,Grey literature platforms,,"Resources for the Future (RFF) is a nonprofit research institute. Its “media.rff.org” hosts reports, policy briefs, and data (grey literature) ."
+scholarworks.wm.edu,3,University / institutional repositories,,"Institutional repository archiving theses, dissertations, and faculty outputs. (https://scholarworks.wm.edu)"
+repository.upenn.edu,3,University / institutional repositories,,"Institutional repository archiving theses, dissertations, and faculty outputs from University of Pennsylvania"
+cpr-assets.s3.amazonaws.com,3,Grey literature platforms,,“cpr-assets” is the document repository for the Center for Progressive Reform. CPR is a nonprofit research and advocacy organization that publishes independent policy analyses and reports (e.g. PDFs of studies on this S3 platform)
+c2es.org,3,Grey literature platforms,,Nonprofit/organization site publishing reports/briefs (grey literature). (https://c2es.org)
+pubs.usgs.gov,3,Government repositories,,USGS Publications Warehouse (pubs.usgs.gov) is the official U.S. Geological Survey repository for its scientific reports and data
+dl.acm.org,3,Scholarly society / association publishers,,"The ACM Digital Library is the publishing platform of the Association for Computing Machinery (a scholarly society). It hosts ACM’s peer-reviewed journals, magazines, and conference proceedings in the computing field"
+search.issuelab.org,3,Grey literature platforms,,IssueLab (now part of Candid) is an open repository of research reports by foundations and NGOs –
+shareok.org,3,University / institutional repositories,,SHAREOK is the open institutional repository of the University of Oklahoma (OU) (and UCO)
+eartharxiv.org,3,Grey literature platforms,,Nonprofit/organization site publishing reports/briefs (grey literature). (https://eartharxiv.org)
+digital.lib.washington.edu,3,University / institutional repositories,,The University of Washington’s ResearchWorks Archive (digital.lib.washington.edu) is UW’s institutional repository for scholarly work
+atlaspolicy.com,3,Grey literature platforms,,Atlas Public Policy is a policy research group that produces independent analyses and reports on energy and transportation policy (grey literature). Their data-driven reports provide decision-relevant information for policymakers
+muse.jhu.edu,3,University presses,,"Project MUSE is a nonprofit collaboration led by Johns Hopkins University Press and university library partners, hosting scholarly books and journals from university presses"
+dpceonline.it,3,Scholarly society / association publishers,,DPCE Online (Diritto Pubblico Comparato ed Europeo Online) is a peer-reviewed open-access law journal in comparative public law. It is published under the auspices of the Associazione DPCE (an academic society of comparative public law scholars)
+digitalcommons.calpoly.edu,3,University / institutional repositories,,"DigitalCommons@CalPoly is Cal Poly’s institutional digital archive. It preserves and shares the university community’s research, scholarship, and publications (including master’s theses and senior projects) on an open-access platform"
+baylor-ir.tdl.org,3,University / institutional repositories,,"BEARdocs (baylor-ir.tdl.org) is Baylor University’s institutional repository, part of the Texas Digital Library network. It archives Baylor’s theses, dissertations, and other scholarly works for open access"
+cdn.catf.us,2,Grey literature platforms,,The Clean Air Task Force (catf.us) is a nonprofit climate/environmental advocacy group
+academia.edu,2,Grey literature platforms,,"Academia.edu is a commercial social networking platform for academics to share papers (user-uploaded content, not formally peer-reviewed)"
+World Scientific,2,Commercial academic publishers,,World Scientific Publishing is a leading independent academic publisher (for-profit) of scholarly books and journals
+api.mountainscholar.org,2,University / institutional repositories,,"Mountain Scholar is Colorado State University’s open-access institutional repository, collecting and preserving CSU scholarly works "
+auf.isa-arbor.com,2,Scholarly society / association publishers,,AUF (Arboriculture & Urban Forestry) is the peer-reviewed journal of the International Society of Arboriculture 
+cec.org,2,Government repositories,,The Commission for Environmental Cooperation (CEC) is a tri-national (US/Canada/Mexico) environmental body
+apps.ecology.wa.gov,2,Government repositories,,"This is the Washington State Department of Ecology’s publications portal, which provides access to the agency’s environmental reports and forms "
+cedar.wwu.edu,2,University / institutional repositories,,"CEDAR is Western Washington University’s open-access institutional repository for faculty, student and staff scholarship"
+cfm.va.gov,2,Government repositories,,The Office of Patient Centered Care & Cultural Transformation (VA) “CFM” portal provides clinical practice guidelines and reports
+climatejustice.ubc.ca,2,Grey literature platforms,,UBC’s Climate Justice Hub is a university-affiliated research initiative; its site shares reports and resources on climate justice (non‐peer-reviewed policy analysis).
+coloradoriverrecovery.org,2,Grey literature platforms,,The Colorado River Recovery Program is a U.S. Department of the Interior initiative; its site hosts research reports on river ecology 
+dash.harvard.edu,2,University / institutional repositories,,DASH (Digital Access to Scholarship at Harvard) is Harvard’s open-access institutional repository (Digital Commons) for Harvard faculty and student scholarship
+dbpia.co.kr,2,Commercial academic publishers,,DBpia is a South Korean commercial academic platform (publisher/aggregator) of scholarly journals and papers 
+digitalcommons.law.lsu.edu,2,University / institutional repositories,,LSU Law Digital Commons is the institutional repository of the LSU Paul M. Hebert Law Center
+digitalcommons.wku.edu,2,University / institutional repositories,,"TopSCHOLAR is Western Kentucky University’s open-access institutional repository (Digital Commons) for faculty, student and staff scholarship"
+digitalrepository.unm.edu,2,University / institutional repositories,,"UNM Digital Repository is the University of New Mexico’s open-access institutional repository for scholarship and research from UNM faculty, staff and students"
+digitalshowcase.lynchburg.edu,2,University / institutional repositories,,Digital Showcase is the University of Lynchburg’s open-access institutional repository (Knight-Capron Library) for selected university scholarship[22]
+eap.wisc.edu,2,Grey literature platforms,,UW–Madison’s Energy Analysis and Policy (EAP) program site shares research projects and reports on energy and environmen
+earthjustice.org,2,Grey literature platforms,,Earthjustice is a nonprofit public-interest environmental law organization
+ecoevorxiv.org,2,Preprint / working paper servers,,EcoEvoRxiv is an open preprint repository for ecology and evolutionary biology
+econstor.eu,2,Open access publishers,,"EconStor is an open-access repository for economics literature (working papers, articles) run by the ZBW Leibniz Information Centre "
+elischolar.library.yale.edu,2,University / institutional repositories,,"Institutional repository archiving theses, dissertations, and faculty outputs. (https://elischolar.library.yale.edu)"
+emerald.com,2,Commercial academic publishers,,"Emerald Publishing is a global for-profit publisher of academic journals and books (primarily in management, business, library science)."
+engrxiv.org,2,Grey literature platforms,,engrXiv is an open preprint archive for engineering research (hosted by Open Engineering Inc.)
+espis.boem.gov,2,Government repositories,,ESPIS (Environmental Studies Program Information System) is the U.S. BOEM (Bureau of Ocean Energy Management) repository of coastal/ocean research reports
+gsa.gov,2,Government repositories,,The U.S. General Services Administration (GSA) is a federal agency; its website provides official government reports and resources 
+hollowaygroup.org,2,Grey literature platforms,,The Holloway Group (University of Wisconsin) is a research group on air quality
+indigo.uic.edu,2,University / institutional repositories,,"Indigo is the University of Illinois Chicago’s institutional repository, hosting scholarly works by UIC faculty, students and staff."
+ir.library.louisville.edu,2,University / institutional repositories,,ThinkIR is the University of Louisville’s open-access institutional repository for the Louisville community’s research (faculty and student works).
+irlaw.umkc.edu,2,Legal / policy databases,,
+jacc.org,2,Commercial academic publishers,,JACC (Journal of the American College of Cardiology) is the flagship journal of the American College of Cardiology; it is published by Elsevier 
+journals.ametsoc.org,2,Scholarly society / association publishers,,These journals are published by the American Meteorological Society (AMS)
+knowledge.uchicago.edu,2,University / institutional repositories,,Knowledge@UChicago is the University of Chicago’s open institutional repository for faculty and student scholarship 
+nap.nationalacademies.org,2,Government repositories,,The National Academies Press (NAP) publishes reports by the U.S. National Academies; it provides free access to government-supported science and engineering reports
+nrdc.org,2,Grey literature platforms,,The Natural Resources Defense Council (NRDC) is a nonprofit environmental advocacy group; its website offers reports and policy analyses on environmental issues 
+nwarpc.org,2,Government repositories,,The Northwest Arkansas Regional Planning Commission is a local government planning body; its site provides regional planning reports and studies
+osf.io,2,Grey literature platforms,,"The Open Science Framework (OSF) is a nonprofit platform for sharing research outputs (preprints, data, project materials) outside traditional publishing channels"
+planning.erdc.dren.mil,2,Government repositories,,The U.S. Army Corps of Engineers Engineer Research & Development Center (ERDC) site (erdc.dren.mil) hosts technical reports and research 
+policycommons.net,2,Grey literature platforms,,"Policy Commons is an aggregator of policy research from think tanks, NGOs and government"
+povertyactionlab.org,2,Grey literature platforms,,The Abdul Latif Jameel Poverty Action Lab (J-PAL) is a nonprofit research organization at MIT;
+prpr.cni.re.kr,2,Grey literature platforms,,PRPR (충남연구원 정책연구플랫폼) is the Policy Research Platform of the Chungnam Research Institute (South Korea); it provides access to regional policy research reports.
+railcdc.org,2,Grey literature platforms,,Community development nonprofit; publishes local reports/resources.
+rave.ohiolink.edu,2,University / institutional repositories,,OhioLINK ETD links use rave subdomain; institutional theses/dissertations.
+rd.usda.gov,2,Government repositories,,USDA Rural Development official site hosts federal publications/reports.
+repository.arizona.edu,2,University / institutional repositories,,"UA institutional repository for theses, articles, datasets."
+researchsquare.com,2,Preprint / working paper servers,,Preprint platform for early-stage manuscripts (Springer Nature partner).
+rongyidianshang.com,2,None/Unknown,,Not in English
+scholar.archive.org,2,Grey literature platforms,,"Internet Archive Scholar discovery/aggregation—hosts copies, not original publisher."
+science.org,2,Grey literature platforms,,AAAS society publishes Science family of journals.
+sciencepolicyjournal.org,2,Scholarly society / association publishers,,"JSPG nonprofit OA, peer‑reviewed policy journal."
+stacks.cdc.gov,2,Government repositories,,CDC Stacks—official CDC publications repository.
+trid.trb.org,2,Government repositories,,"TRID index/abstracts database (catalog), under The National Academies of Sciences, Engineering, and Medicine."
+twj-ojs-tdl.tdl.org,2,Grey literature platforms,,Texas Water Journal on TDL OJS; peer‑reviewed OA journal.
+ucs.org,2,Grey literature platforms,,Union of Concerned Scientists 
+udspace.udel.edu,2,University / institutional repositories,,University of Delaware DSpace institutional repository.
+wvww.naseo.org,2,Scholarly society / association publishers,,National Association of State Energy Officials
+CEQ,1,Government repositories,,Council on Environmental Quality—Executive Office of the President; official publications.
+ERIC,1,Government repositories,,evidence=https://eric.ed.gov; U.S. Dept. of Education index/repository for education research.
+Google Patents,1,Grey literature platforms,,Patent search/aggregation platform; not academic publishing.
+The Korean Association of …,1,Commercial academic publishers,,Journal of the Korean Association of Geographic Information Studies
+White House press release …,1,Government repositories,,Official federal releases on whitehouse.gov.
+acpjournals.org,1,Scholarly society / association publishers,,American College of Physicians publishes peer‑reviewed journals.
+aeaweb.org,1,Scholarly society / association publishers,,"American Economic Association—journals (AER, AEJ), proceedings."
+airalliancehouston.org,1,Grey literature platforms,,"Nonprofit advocacy; publishes reports/briefs, not peer‑reviewed journals."
+ajconline.org,1,Commercial academic publishers,,The American Journal of Cardiology published by Elsevier (commercial).
+alexandriava.gov,1,Government repositories,,Municipal government site hosting city documents/reports.
+amargosaconservancy.org,1,Grey literature platforms,,Nonprofit conservation org producing reports.
+amjtransplant.org,1,Commercial academic publishers,,American Journal of Transplantation
+anacostiariverkeeper.org,1,Grey literature platforms,,Nonprofit; publishes monitoring reports and briefs.
+api.taylorfrancis.com,1,Commercial academic publishers,,Taylor & Francis API domain; commercial academic publisher.
+apps.dtic.mil,1,Government repositories,,Defense Technical Information Center—DoD technical reports.
+aquadoc.typepad.com,1,Grey literature platforms,,Professional blog; not an academic publisher.
+arch.umd.edu,1,Grey literature platforms,,University school center posting institutional materials and reports.
+army.mil,1,Government repositories,,Official U.S. Army site with publications/technical reports.
+ars.usda.gov,1,Government repositories,,USDA Agricultural Research Service publications (federal agency).
+asset.pearlcertification.com,1,Grey literature platforms,,Private company site; white papers/marketing resources.
+bakerbotts.com,1,Grey literature platforms,,Law firm client alerts/white papers; not scholarly publishing.
+benthamdirect.com,1,Commercial academic publishers,,Bentham Science/Bentham Open—commercial journal publisher.
+beyondtoxics.org,1,Grey literature platforms,,Nonprofit EJ advocacy; publishes reports/briefs.
+bio-conferences.org,1,Grey literature platforms,,EDP Sciences OA conference proceedings platform.
+blsa.studentorg.berkeley.edu,1,Scholarly society / association publishers,,Student organization site (institutional content).
+boem.gov,1,Government repositories,,Bureau of Ocean Energy Management—federal agency publications.
+brill.com,1,Commercial academic publishers,,International academic publisher (books/journals).
+cabidigitallibrary.org,1,Grey literature platforms,,CABI (intergovernmental nonprofit) publishes journals/books and hosts a digital library.
+cdc.gov,1,Government repositories,,CDC is a U.S. federal public health agency; official reports/guidance.
+cdt.org,1,Grey literature platforms,,Center for Democracy & Technology—nonprofit policy research/advocacy publications.
+cebra.s3.amazonaws.com,1,Grey literature platforms,,Association
+ceeol.com,1,Grey literature platforms,,Central and Eastern European Online Library is an aggregator/hosting platform for journals/books; not original publisher of record.
+chargevc.org,1,Grey literature platforms,,Organization site posting updates/reports; not scholarly publishing.
+chem.tti.tamu.edu,1,Grey literature platforms,,Texas A&M Transportation Institute program page; hosts reports/data.
+chemrxiv.org,1,Preprint / working paper servers,,Chemistry preprint server (ACS and partners).
+chesapeakebay.net,1,Grey literature platforms,,EPA-led partnership portal; official data/reports.
+chhs.fresnostate.edu,1,University / institutional repositories,,College site disseminating institutional materials.
+china-ces.org,1,Scholarly society / association publishers,,Chinese Economists Society—association with journals/conference proceedings.
+cityparksalliance.org,1,Grey literature platforms,,Nonprofit; publishes policy briefs/reports.
+climate.hawaii.gov,1,Government repositories,,State of Hawai‘i climate portal with official plans/reports.
+climateadvocacylab.org,1,Grey literature platforms,,Nonprofit project publishing toolkits/reports.
+climateandsecurity.org,1,Scholarly society / association publishers,,Council on Strategic Risks program publishing reports/analyses.
+cloud.env.nm.gov,1,Government repositories,,New Mexico Environment Department—official documents/data.
+cnu.org,1,Grey literature platforms,,Congress for the New Urbanism—nonprofit publishing reports/policy.
+coastal.la.gov,1,Government repositories,,Louisiana CPRA—state agency plans/reports/data.
+columbiascwater.net,1,Grey literature platforms,,Municipal water utility posting official documents.
+copi.helunahealth.org,1,Grey literature platforms,,Public health nonprofit program; reports/resources.
+cris.unibo.it,1,University / institutional repositories,,University of Bologna CRIS/IRIS repository for research outputs.
+criticalcare.theclinics.com,1,Commercial academic publishers,,Elsevier Clinics series (commercial academic publisher).
+criticaldebateshsgj.scholasticahq …,1,Open access publishers,,Scholastica‑hosted OA journal platform.
+csus.edu,1,University / institutional repositories,,University site publishing institutional content and reports.
+cureus.com,1,Open access publishers,,OA medical journal platform with peer review.
+dhhs.utah.gov,1,Government repositories,,Utah DHHS—state agency publications.
+digital.library.ncat.edu,1,University / institutional repositories,,"North Carolina A&T institutional repository (DSpace) for theses, dissertations, and research outputs."
+digital.wpi.edu,1,University / institutional repositories,,"Worcester Polytechnic Institute Digital WPI repository, hosting theses, dissertations, and faculty research."
+digitalcommons.bucknell.edu,1,University / institutional repositories,,Bucknell University institutional repository (Digital Commons) for student/faculty work.
+digitalcommons.conncoll.edu,1,University / institutional repositories,,Connecticut College institutional repository (Digital Commons) archiving theses and scholarly works.
+digitalcommons.csumb.edu,1,University / institutional repositories,,"CSU Monterey Bay Digital Commons repository, archiving theses, capstones, and research."
+digitalcommons.du.edu,1,University / institutional repositories,,"University of Denver Digital Commons repository, theses/dissertations and faculty publications."
+digitalcommons.fiu.edu,1,University / institutional repositories,,"Florida International University Digital Commons repository, theses and scholarly outputs."
+digitalcommons.library.umaine.edu,1,University / institutional repositories,,"University of Maine Digital Commons repository for theses, dissertations, faculty publications."
+digitalcommons.lmu.edu,1,University / institutional repositories,,Loyola Marymount University Digital Commons repository archiving theses and scholarly works.
+digitalcommons.memphis.edu,1,University / institutional repositories,,University of Memphis institutional repository (Digital Commons) for theses and research.
+digitalcommons.mtu.edu,1,University / institutional repositories,,"Michigan Tech Digital Commons repository hosting theses, dissertations, and reports."
+digitalcommons.pace.edu,1,University / institutional repositories,,"Pace University Digital Commons repository archiving theses, dissertations, and scholarly works."
+digitalcommons.providence.edu,1,University / institutional repositories,,Providence College Digital Commons repository for theses and scholarly content.
+digitalcommons.unmc.edu,1,University / institutional repositories,,"Univ. of Nebraska Medical Center institutional repository for theses, dissertations, and scholarly output."
+digitalcommons.uri.edu,1,University / institutional repositories,,"University of Rhode Island Digital Commons repository for theses, dissertations, and faculty works."
+digitalcommons.usu.edu,1,University / institutional repositories,,Utah State University Digital Commons institutional repository for theses and scholarly works.
+digitalrepository.salemstate.edu,1,University / institutional repositories,,"Salem State University DSpace repository hosting theses, dissertations, and reports."
+digitalworks.union.edu,1,University / institutional repositories,,"Union College Digital Works repository, archiving theses and scholarly outputs."
+dione.lib.unipi.gr,1,University / institutional repositories,,University of Piraeus institutional repository (in Greek/English) for theses and dissertations.
+docs.lib.purdue.edu,1,University / institutional repositories,,"Purdue University institutional repository for dissertations, theses, and faculty publications."
+drum.lib.umd.edu,1,University / institutional repositories,,Digital Repository at the University of Maryland (DRUM) for dissertations and research.
+dshousing.org,1,Grey literature platforms,,"Nonprofit affordable housing org publishing reports/briefs, not scholarly journals."
+econ.unm.edu,1,Grey literature platforms,,"University of New Mexico Econ Dept site (program-level content, not publishing)."
+efifoundation.org,1,Grey literature platforms,,Energy Futures Initiative Foundation—nonprofit publishing reports and analyses.
+electricschoolbusinitiative.org,1,Grey literature platforms,,"Nonprofit project site producing reports/resources, not academic publishing."
+elgaronline.com,1,Commercial academic publishers,,"Edward Elgar Publishing, commercial academic publisher of economics/law books and journals."
+energy.gov,1,Government repositories,,"U.S. DOE official site with technical reports, publications, datasets."
+energyfuturesinitiative.org,1,Grey literature platforms,,Think tank founded by Ernest Moniz; publishes policy reports.
+eprints.lse.ac.uk,1,University / institutional repositories,,"LSE Research Online repository, institutional archive of scholarly research outputs."
+essd.copernicus.org,1,Commercial academic publishers,,"Earth System Science Data journal, published by Copernicus Publications."
+eta-publications.lbl.gov,1,Government repositories,,Lawrence Berkeley National Lab Energy Technologies Area publications repository.
+etd.library.emory.edu,1,University / institutional repositories,,Emory University Electronic Theses and Dissertations repository.
+etda.libraries.psu.edu,1,University / institutional repositories,,Penn State Electronic Theses and Dissertations for Graduate School.
+europepmc.org,1,Open access publishers,,"Europe PMC, OA biomedical literature repository (partnered with PubMed)."
+extension.illinois.edu,1,Grey literature platforms,,"University Extension service publishing outreach reports/materials, not scholarly journals."
+faa.gov,1,Government repositories,,"Federal Aviation Administration, U.S. gov. site with technical/public reports."
+figshare.swinburne.edu.au,1,University / institutional repositories,,Swinburne University figshare repository for theses and scholarly works.
+floridadep.gov,1,Government repositories,,"Florida Department of Environmental Protection official site with reports, data."
+flyipt.com,1,Grey literature platforms,,"Airport authority site (Williamsport Regional), publishing local documents only."
+friendsoftheinyo.org,1,Grey literature platforms,,Nonprofit environmental group publishing advocacy reports.
+fs.usda.gov,1,Government repositories,,USDA Forest Service official site for publications and research.
+garnetenergycenter.com,1,Grey literature platforms,,"Private energy project informational site, not an academic publisher."
+grda.com,1,Government repositories,,"Grand River Dam Authority, Oklahoma state agency site."
+greatcitymississippi.org,1,Grey literature platforms,,Local nonprofit/advocacy org publishing reports.
+greenlining.org,1,Grey literature platforms,,Nonprofit policy institute publishing equity reports/briefs.
+hammer.purdue.edu,1,University / institutional repositories,,Purdue Univ. Graduate School Theses and Dissertations repository.
+hbs.edu,1,Grey literature platforms,,Harvard Business School site hosting working papers (not formal publisher).
+healthaffairs.org,1,Commercial academic publishers,,"Peer-reviewed health policy journal published by Project HOPE, a nonprofit but operates commercially."
+implementationscience …,1,Open access publishers,,OA peer‑reviewed journal published by BioMed Central (Springer Nature).
+inldigitallibrary.inl.gov,1,Government repositories,,Idaho National Laboratory digital library (DOE) hosts official reports and publications.
+innovation.luskin.ucla.edu,1,Grey literature platforms,,UCLA Luskin Center for Innovation publishes policy reports and briefs.
+ir.lawnet.fordham.edu,1,University / institutional repositories,,Fordham Law Scholarship Repository (institutional repository for papers and theses).
+isps.yale.edu,1,Grey literature platforms,,Yale Institution for Social and Policy Studies publishes reports/working papers.
+istes.org,1,Scholarly society / association publishers,,ISTES operates academic conferences/journals as a scholarly association.
+j-kosham.or.kr,1,Scholarly society / association publishers,,Korea Society of Hazard Mitigation journal—society publisher.
+jacsdirectory.com,1,Open access publishers,,JACS Directory hosts OA journals across applied sciences.
+janeway.uncpress.org,1,University presses,,UNC Press journals platform (university press).
+jech.bmj.com,1,Commercial academic publishers,,Journal of Epidemiology & Community Health published by BMJ (commercial publisher).
+johnmmorehouse.com,1,Grey literature platforms,,Personal/professional site; occasional reports/posts not peer‑reviewed.
+journal-buildingscities.org,1,Open access publishers,,Buildings and Cities is a peer‑reviewed open‑access journal.
+journal.kaopg.or.kr,1,Scholarly society / association publishers,,Korean academic association journal (society publisher).
+journalissues.org,1,Open access publishers,,Publishes OA journals across disciplines.
+journals-test.library.indianapolis.iu …,1,University / institutional repositories,,IU Library Publishing platform for university‑hosted journals (institutional).
+journals.library.columbia.edu,1,University / institutional repositories,,Columbia University Libraries journal hosting (institutional publishing platform).
+journals.library.iit.edu,1,University / institutional repositories,,Illinois Institute of Technology library‑hosted journals platform.
+journals.librarypublishing.arizona …,1,University / institutional repositories,,University of Arizona Libraries publishing platform for journals (institutional).
+justtransitionforall.com,1,Grey literature platforms,,Advocacy/knowledge hub site publishing briefs and resources.
+kiss.kstudy.com,1,Grey literature platforms,,KISS is a Korean scholarly database/aggregator; not original publisher of record.
+kluwerlawonline.com,1,Legal / policy databases,,Wolters Kluwer law journals and resources database.
+larimer.gov,1,Government repositories,,"Larimer County (CO) official government site—plans, reports, and documents."
+le.uwpress.org,1,University presses,,Land Economics journal from University of Wisconsin Press.
+legacy-assets.eenews.net,1,Grey literature platforms,,E&E News (journalism outlet) archives; not scholarly publishing.
+lindseyresearch.com,1,Grey literature platforms,,Consulting/research firm publishing reports/white papers.
+https://live-socio-spatial-climate-collaborative.pantheon.berkeley.edu/,1,Grey literature platforms,,Socio-Spatial Climate Collaborative at UC Berkley
+louis.pressbooks.pub,1,Grey literature platforms,,Pressbooks platform for OER/open textbooks (library consortium).
+lurepository.lakeheadu.ca,1,University / institutional repositories,,Lakehead University institutional repository (DSpace).
+mackseyjournal.scholasticahq.com,1,Open access publishers,,The Macksey Journal (JHU) hosted on Scholastica; OA journal.
+mavmatrix.uta.edu,1,University / institutional repositories,,University of Texas Arlington institutional repository.
+media.dogwoodalliance.org,1,Grey literature platforms,,Nonprofit advocacy group publishing reports and media.
+media.journoportfolio.com,1,Grey literature platforms,,Portfolio hosting platform for articles; not a publisher.
+media4.manhattan-institute.org,1,Grey literature platforms,,Think tank publishing policy reports and briefs.
+medicosphere.upnjatim.ac.id,1,Open access publishers,,University‑hosted peer‑reviewed OA medical journal.
+medrxiv.org,1,Preprint / working paper servers,,Preprint server for health sciences (uncertified preprints).
+medvixpublications.org,1,Open access publishers,,OA journal publisher site (multiple titles).
+menandsny.gov,1,Government repositories,,Village of Menands (NY) official government site—documents/notices.
+mentalhealth.bmj.com,1,Commercial academic publishers,,BMJ Mental Health journal (BMJ publishing).
+movingforwardnetwork.com,1,Grey literature platforms,,Nonprofit network publishing EJ reports/resources.
+naturalhazardsresiliencecenter.org,1,Grey literature platforms,,University‑based research center publishing reports/outreach.
+netl.doe.gov,1,Government repositories,,U.S. DOE National Energy Technology Laboratory publications and analysis.
+newea.org,1,Scholarly society / association publishers,,NEWEA publishes a professional journal and proceedings.
+nhsjs.com,1,Open access publishers,,"National High School Journal of Science—free, peer‑reviewed OA journal."
+oaktrust.library.tamu.edu,1,University / institutional repositories,,Texas A&M OAKTrust institutional repository.
+oceanconservancy.org,1,Grey literature platforms,,Nonprofit publishes science‑based reports/white papers.
+oewri.missouristate.edu,1,Grey literature platforms,,University research institute publishing technical reports/datasets.
+onepetro.org,1,Scholarly society / association publishers,,Multi‑society technical library led by Society of Petroleum Engineers.
+online.ucpress.edu,1,University presses,,University of California Press journals/books platform.
+onlinepubs.trb.org,1,Scholarly society / association publishers,,Transportation Research Board (NAS) publishes proceedings/reports.
+orb.binghamton.edu,1,University / institutional repositories,,Binghamton University institutional repository (Open Repository @ Binghamton).
+pdxscholar.library.pdx.edu,1,University / institutional repositories,,PDXScholar institutional repository (Portland State University).
+periodicos.fgv.br,1,University presses,,Fundação Getulio Vargas journals platform (university/academic institution).
+phaidra.univie.ac.at,1,University / institutional repositories,,University of Vienna PHAIDRA institutional repository.
+piercecounty.caimaps.info,1,Government repositories,,County GIS/maps portal hosting official datasets/documents.
+planhillsborough.org,1,Government repositories,,Hillsborough County (FL) planning organizations—official plans/reports.
+policyinnovation.org,1,Grey literature platforms,,Policy Innovation org publishes policy analyses and reports.
+policyintegrity.org,1,Grey literature platforms,,NYU Law’s Institute for Policy Integrity publishes policy reports/briefs.
+preview.yndc.org,1,Grey literature platforms,,Youngstown Neighborhood Development Corp. publishes community plans/reports.
+proceedings.scipy.org,1,Open access publishers,,SciPy Conference peer‑reviewed OA proceedings.
+profpubs.com,1,Grey literature platforms,,Professional publications/vendor site; not an academic publisher of record.
+publicationsncte.org,1,Scholarly society / association publishers,,National Council of Teachers of English publishes journals/books.
+publish.tntech.edu,1,University / institutional repositories,,Tennessee Tech library publishing/IR platform for journals and theses.
+pubs.aip.org,1,Scholarly society / association publishers,,American Institute of Physics journals and proceedings (society).
+pubs.lib.umn.edu,1,University / institutional repositories,,University of Minnesota Libraries Publishing (institutional journals).
+pwcva.gov,1,Government repositories,,Prince William County (VA) official site—plans/reports/documents.
+pwvas.org,1,Scholarly society / association publishers,,Proceedings of the West Virginia Academy of Science—society proceedings.
+rand.org,1,Grey literature platforms,,RAND Corporation—nonprofit research organization publishing reports and briefs.
+repository.kli.re.kr,1,University / institutional repositories,,Korea Labor Institute DSpace repository archiving research outputs.
+repository.library.georgetown.edu,1,University / institutional repositories,,Georgetown University institutional repository (DSpace) for theses and faculty works.
+repository.lsu.edu,1,University / institutional repositories,,LSU Digital Commons (IR) hosts theses/dissertations and scholarly works.
+repository.mines.edu,1,University / institutional repositories,,Colorado School of Mines institutional repository for theses and research outputs.
+repository.wellesley.edu,1,University / institutional repositories,,Wellesley College Digital Repository archiving theses and faculty scholarship.
+repositum.tuwien.at,1,University / institutional repositories,,TU Wien reposiTUm institutional repository for theses and publications.
+research-collection.ethz.ch,1,University / institutional repositories,,ETH Zurich Research Collection institutional repository.
+research.library.kutztown.edu,1,University / institutional repositories,,Kutztown University Research Commons (IR).
+researchinaction.com,1,Grey literature platforms,,Consulting/research firm site publishing white papers/blog posts; not a scholarly publisher.
+ripuc.ri.gov,1,Government repositories,,Rhode Island Public Utilities Commission—official dockets and documents.
+safety4sea.com,1,Grey literature platforms,,"Maritime news/insight portal; journalism/industry reports, not academic publishing."
+scholarinsightjournal.com,1,Open access publishers,,OA journal platform publishing peer-reviewed articles.
+scholarsarchive.library.albany.edu,1,University / institutional repositories,,University at Albany Scholars Archive (IR).
+scholarsbank.uoregon.edu,1,University / institutional repositories,,University of Oregon Scholars’ Bank institutional repository.
+scholarship.law.columbia.edu,1,University / institutional repositories,,Columbia Law School Scholarship Archive (IR).
+scholarship.law.unc.edu,1,University / institutional repositories,,UNC Law Scholarship Repository (IR).
+scholarship.law.wm.edu,1,University / institutional repositories,,William & Mary Law School Scholarship Repository (IR).
+scholarship.richmond.edu,1,University / institutional repositories,,University of Richmond Scholarship Repository (IR).
+scholarship.shu.edu,1,University / institutional repositories,,Seton Hall University eRepository (IR).
+scholarworks.sjsu.edu,1,University / institutional repositories,,SJSU ScholarWorks institutional repository.
+scholarworks.uark.edu,1,University / institutional repositories,,University of Arkansas ScholarWorks institutional repository.
+scholarworks.utep.edu,1,University / institutional repositories,,UTEP ScholarWorks institutional repository.
+scienceforgeorgia.org,1,Grey literature platforms,,Nonprofit advocacy/org publishing reports and policy briefs.
+sciepublish.com,1,Open access publishers,,SciePublish—open-access publisher of peer‑reviewed journals.
+selc.org,1,Grey literature platforms,,Southern Environmental Law Center nonprofit; policy/legal reports.
+shs.cairn.info,1,Grey literature platforms,,Cairn.info is a francophone journals/books aggregation/hosting platform; not original publisher of record.
+sierraclub.org,1,Grey literature platforms,,NGO publishing reports/briefs; not an academic publisher.
+sigmarepository.org,1,University / institutional repositories,,Sigma Nursing Repository (Sigma Theta Tau) archiving scholarly works/datasets.
+sjtpo.org,1,Government repositories,,South Jersey Transportation Planning Organization—MPO publishing official plans/reports.
+spp.ucr.edu,1,Grey literature platforms,,UC Riverside School of Public Policy—center outputs/working papers.
+stars.library.ucf.edu,1,University / institutional repositories,,UCF STARS institutional repository.
+tesidottorato.depositolegale.it,1,University / institutional repositories,,Italian national legal deposit for doctoral theses (repository).
+theicct.org,1,Grey literature platforms,,International Council on Clean Transportation—think tank reports/briefs.
+theseus.fi,1,University / institutional repositories,,Finnish national repository for UAS theses/publications.
+thurstonclimatecollaborative.org,1,Grey literature platforms,,Local collaborative publishing plans/resources (nonprofit/government partners).
+transport-links.com,1,Grey literature platforms,,Knowledge hub hosting reports/resources; not a primary academic publisher.
+usbr.gov,1,Government repositories,,U.S. Bureau of Reclamation—federal agency publications.
+usp510.github.io,1,Grey literature platforms,,GitHub Pages course/project site hosting materials; not a journal publisher.
+uta.pressbooks.pub,1,Grey literature platforms,,University of Texas Arlington Pressbooks OER/open textbooks platform.
+uwm.edu,1,Grey literature platforms,,University of Wisconsin–Milwaukee institutional site; working papers/reports possible.
+uwyo.edu,1,Grey literature platforms,,University of Wyoming institutional site; working papers/reports possible.
+vdot.virginia.gov,1,Government repositories,,Virginia Department of Transportation—state agency publications/data.
+via.library.depaul.edu,1,University / institutional repositories,,Via Sapientiae (DePaul University) institutional repository.
+villageofislandlake.com,1,Government repositories,,Village municipal government site hosting official documents.
+waportal.org,1,Government repositories,,Washington State Department of Health portal—official publications/data.
+water.ca.gov,1,Government repositories,,California Department of Water Resources—state agency publications and data.
+webthesis.biblio.polito.it,1,University / institutional repositories,,Politecnico di Torino Webthesis repository for theses.
+wes.copernicus.org,1,Scholarly society / association publishers,,Wind Energy Science (EGU journal) published by Copernicus; society‑owned publishing.
+… .us-ashburn-1.oci.customer-oci.com,1,None/Unknown,,Oracle Cloud object storage link; not a publisher (reason=false positive).
+… Jusfice Screening Tool (CEJST),1,None/Unknown,,Federal environmental justice mapping tool; not a publisher (reason=false positive).

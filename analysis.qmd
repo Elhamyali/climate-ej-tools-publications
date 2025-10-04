@@ -31,6 +31,7 @@ citation:
 draft: false
 bibliography: references.bib
 code-fold: true
+number-sections: true
 # reference-location: margin
 # citation-location: margin
 echo: true
@@ -61,11 +62,9 @@ The climate tools assessed are:
 -   FEMA’s **Future Risk Index (FRI)**
 -   CDC’s **Environmental Justice Index (EJI)**
 
-The data for this project comes from Google scholar and last refreshed on August 29, 2025.
+The data for this project comes from Google scholar and last refreshed on September 15, 2025.
 
 Original raw datasets are saved in the `data/` folder. This script reduces and cleans those datasets to prepare them for analysis.
-
-------------------------------------------------------------------------
 
 ## Cleaning
 
@@ -76,6 +75,7 @@ I start by loading the packages needed for file handling, data wrangling, and vi
 
 ## Folder structure helpers
 library(here)
+library(readr)
 library(ezknitr)
 
 ## Data import & cleaning
@@ -83,7 +83,9 @@ library(tidyverse)
 library(janitor)
 library(lubridate)
 library(janitor)
-# library(rlang)
+library(stringr)
+library(forcats)
+library(vcd)
 
 ## Visualization
 library(highcharter)
@@ -95,23 +97,23 @@ library(gt)
 
 ### Import raw data
 
-I import all .csv files from the `data/` folder, then save them as .rds files into `output/`. This preserves their structure and speeds up future reads.
+I import all .csv files from the `01_raw_data/` folder, then save them as .rds files into `05_cleaned_datasets/`. This preserves their structure and speeds up future reads.
 
 ```{r import-data, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: import-data
 
 # List all CSV files
-csv_files <- list.files(here("data"), pattern = "\\.csv$", full.names = TRUE)
+csv_files <- list.files(here("01_raw_data"), pattern = "\\.csv$", full.names = TRUE)
 
 # Read into a list of dataframes
 datasets <- map(csv_files, read.csv)
 names(datasets) <- tools::file_path_sans_ext(basename(csv_files))
 
-# Save each dataset as .rds in output/
+# Save each dataset as .rds in 05_cleaned_datasets/
 walk2(
   datasets,
   names(datasets),
-  ~ saveRDS(.x, here("output", paste0(.y, ".rds")))
+  ~ saveRDS(.x, here("05_cleaned_datasets", paste0(.y, ".rds")))
 )
 ```
 
@@ -125,7 +127,7 @@ Because EJScreen returned more than this, I split the results into four files (e
 #| label: ejscreen-cleaning
 
 # List EJScreen RDS files
-ejscreen_files <- here("output") |>
+ejscreen_files <- here("05_cleaned_datasets") |>
   list.files(pattern = "^ejscreen_\\d+\\.rds$", full.names = TRUE)
 
 # Read, tag, clean variable names
@@ -172,13 +174,13 @@ read_clean_tag <- function(path) {
 # 
 # # Rebuild ejscreen_all if needed
 # if (!exists("ejscreen_all")) {
-#   ejs_files <- list.files(here("output"), pattern = "^ejscreen_\\d+\\.rds$", full.names = TRUE)
+#   ejs_files <- list.files(here("05_cleaned_datasets"), pattern = "^ejscreen_\\d+\\.rds$", full.names = TRUE)
 #   ejscreen_all <- ejs_files |> map(read_clean_tag) |> list_rbind()
 # }
 
 # Process other tools
 other_tools <- c("cejst", "crv", "eji", "fri")
-other_paths <- here("output", paste0(other_tools, ".rds"))
+other_paths <- here("05_cleaned_datasets", paste0(other_tools, ".rds"))
 
 other_list <- other_paths |>
   set_names(~ tools::file_path_sans_ext(basename(.x))) |>
@@ -215,14 +217,9 @@ to_Date <- function(x) {
 }
 
 # Apply date coercion
-if ("query_date" %in% names(ejscreen_all)) {
-  ejscreen_all <- ejscreen_all %>% mutate(query_date = to_Date(query_date))
-}
-
 if (exists("ejscreen_all") && "query_date" %in% names(ejscreen_all)) {
   ejscreen_all <- ejscreen_all %>% mutate(query_date = to_Date(query_date))
 }
-
 if (exists("other_list")) {
   other_list <- other_list %>%
     map(~ if ("query_date" %in% names(.x)) mutate(.x, query_date = to_Date(query_date)) else .x)
@@ -256,204 +253,15 @@ all_tools <- all_tools %>%
   select(-any_of(c("issn", "citation_url", "volume", "issue", "start_page", "end_page")))
 
 # Save combined dataset
-glimpse(all_tools)
-saveRDS(all_tools, here("output", "all_tools.rds"))
-write_csv(all_tools, here("output", "all_tools.csv"))
-
+saveRDS(all_tools, here("05_cleaned_datasets", "all_tools.rds"))
+write_csv(all_tools, here("05_cleaned_datasets", "all_tools.csv"))
 ```
 
 ## Analysis
 
-Before running the analysis, I’ll import two datasets that my colleagues and I collaborated on. These datasets include our manual categorizations of studies and their publishers.
+### Stratified random sampling
 
-**1. Study-level data**
-
--   `all_studies_ira.csv`: A collaborator and I manually categorized publishers for about **10% of the sample**. This dataset is used to calculate **inter-rater agreement (IRA)** and identify where our categorizations differed or aligned.
--   `all_studies_finalized.csv`: This is the **final dataset** after we reviewed disagreements and reached consensus. We updated the **codebook** accordingly, and applied the final categories to the full dataset.
-    -   The corresponding codebook, **`codebook_studies.csv`**, is located in the `codebooks/` folder.
-    -   It defines **four categories** of study classification like applied, mentioned/context, etc. for a total of **10 subcategories.**
-
-**2. Publisher-level data**
-
--   `all_publishers_ira.csv`: Similar to the studies dataset, a collaborator and I manually categorized about **11% of publishers**. This subset is used to assess IRA.
--   `all_publishers_finalized.csv`: The **finalized version** after resolving disagreements and updating the codebook.
-    -   The corresponding codebook, `codebook_publishers.csv`, is in the `codebooks/` folder.
-    -   It defines **10 publisher types**, ranging from *commercial academic publishers* to *grey literature platforms*.
-
-### Inter-rater agreement
-
-Before, I analyze the datasets for all studies and publishers, I will calculate the inter
-
-I will look at each question one by one and clean the data as I go. I will organize the data during the analysis before exploring the results. I'll also export intermediate results into tidy CSV files so they are ready for further visualization and exploration.
-
-### Research question 1
-
-How many research papers or studies have cited or relied on five U.S. federal climate and environmental tools that are threatened, not being maintained, or no longer available?
-
-#### Total number of studies
-
-```{r descriptive-stat-1, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-1
-
-nrow (all_tools)
-
-write_csv(tibble(total_studies = nrow(all_tools)), here("viz", "total_studies.csv"))
-```
-
-#### Count of studies per tool
-
-```{r descriptive-stat-2, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-2
-
-df_tool <- all_tools %>%
-  count(tool_name, name = "n_studies") %>%
-  arrange(desc(n_studies))
-
-hchart(df_tool, "column", hcaes(x = tool_name, y = n_studies)) %>%
-  hc_title(text = "Number of studies by tool") %>%
-  hc_subtitle(text = "Total count of research papers citing or relying on each tool") %>%
-  hc_xAxis(title = list(text = "Tool")) %>%
-  hc_yAxis(title = list(text = "Number of studies"), allowDecimals = FALSE) %>%
-  hc_tooltip(pointFormat = "<b>{point.y}</b> studies") %>%
-  hc_legend(enabled = FALSE) %>%
-  hc_exporting(enabled = TRUE)
-
-write_csv(df_tool, here("viz", "count_per_tool.csv"))
-```
-
-#### Count of studies per year per tool
-
-```{r descriptive-stat-3, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-3
-
-df_year_tool <- all_tools %>%
-  filter(!is.na(year)) %>%
-  count(tool_name, year, name = "n_studies") %>%
-  arrange(tool_name, year)
-
-hchart(
-  df_year_tool,
-  "line",
-  hcaes(x = year, y = n_studies, group = tool_name)
-) %>%
-  hc_title(text = "Studies over time by tool") %>%
-  hc_subtitle(text = "Annual counts of studies citing or relying on each tool") %>%
-  hc_xAxis(title = list(text = "Year"), allowDecimals = FALSE) %>%
-  hc_yAxis(title = list(text = "Number of studies"), allowDecimals = FALSE) %>%
-  hc_tooltip(shared = TRUE, crosshairs = TRUE,
-             headerFormat = "<b>Year: {point.key}</b><br/>",
-             pointFormat = "{series.name}: <b>{point.y}</b><br/>") %>%
-  hc_legend(title = list(text = "Tool")) %>%
-  hc_exporting(enabled = TRUE)
-
-write_csv(df_year_tool, here("viz", "count_per_year_per_tool.csv"))
-```
-
-#### Top 10 most cited studies overall per tool
-
-```{r descriptive-stat-4, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-4
-
-df_top_cites <- all_tools %>%
-  filter(!is.na(cites)) %>%
-  group_by(tool_name) %>%
-  slice_max(order_by = cites, n = 10, with_ties = FALSE) %>%
-  ungroup() %>%
-  select(tool_name, year, title, cites, authors) %>%
-  arrange(tool_name, desc(cites))
-
-# Show table (optional)
-df_top_cites
-
-# Ensure viz/ exists, then export
-if (!dir.exists(here::here("viz"))) dir.create(here::here("viz"), recursive = TRUE)
-readr::write_csv(df_top_cites, here::here("viz", "top10_cites_per_tool.csv"))
-```
-
-#### Top 10 highest `cites_per_year` per tool
-
-This shows which studies are “most cited relative to their age.”
-
-```{r descriptive-stat-5, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-5
-
-df_top_cpy <- all_tools %>%
-  filter(!is.na(cites_per_year)) %>%
-  group_by(tool_name) %>%
-  slice_max(order_by = cites_per_year, n = 10, with_ties = FALSE) %>%
-  ungroup()
-
-df_top_cpy %>% 
-  select(tool_name, year, title, cites_per_year, cites, authors) %>%
-  arrange(tool_name, desc(cites_per_year))
-
-hchart(
-  df_top_cpy,
-  "bar",
-  hcaes(x = reorder(title, cites_per_year), y = cites_per_year, group = tool_name)
-) %>%
-  hc_title(text = "Top 10 studies by cites per year, per tool") %>%
-  hc_subtitle(text = "Highlights studies with the highest relative citation rates") %>%
-  hc_xAxis(title = list(text = "Study title"), labels = list(enabled = FALSE)) %>%  # hide long labels
-  hc_yAxis(title = list(text = "Cites per year")) %>%
-  hc_tooltip(pointFormat = "<b>{point.y}</b> cites/year<br>{point.tool_name}<br>") %>%
-  hc_exporting(enabled = TRUE)
-
-write_csv(df_top_cpy, here("viz", "top10_cites_per_year_per_tool.csv"))
-```
-
-#### Average `cites_per_year` over time per tool
-
-This shows whether more recent papers citing a tool are getting traction.
-
-```{r descriptive-stat-6, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-6
-
-df_avg_cpy <- all_tools %>%
-  filter(!is.na(year), !is.na(cites_per_year)) %>%
-  group_by(tool_name, year) %>%
-  summarise(avg_cpy = mean(cites_per_year, na.rm = TRUE), .groups = "drop")
-
-hchart(df_avg_cpy, "line", hcaes(x = year, y = avg_cpy, group = tool_name)) %>%
-  hc_title(text = "Average cites per year over time, by tool") %>%
-  hc_yAxis(title = list(text = "Average cites per year")) %>%
-  hc_exporting(enabled = TRUE)
-
-write_csv(df_avg_cpy, here("viz", "avg_cites_per_year_over_time.csv"))
-```
-
-#### Publishers
-
-Which top 10 publishers/platforms appear most frequently?
-
-```{r descriptive-stat-7, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-7
-
-df_10_publishers <- all_tools %>%
-  filter(publisher != "") %>%
-  count(publisher, sort = TRUE) %>%
-  slice_head(n = 10)
-
-df_10_publishers
-
-write_csv(df_10_publishers, here("viz", "top_publishers.csv"))
-```
-
-List all publishers from the sample.
-
-```{r descriptive-stat-8, echo = TRUE, message = FALSE, results = 'markup'}
-#| label: descriptive-stat-8
-
-df_all_publishers <- all_tools %>%
-  filter(publisher != "") %>%
-  count(publisher, sort = TRUE)
-
-write_csv(df_all_publishers, here("viz", "all_publishers.csv"))
-```
-
-#### Stratified random sampling & inter-rater agreement
-
-To answer **Research Questions 2 and 3**, I will work with a collaborator to double-code a subset of research studies. Together, we will manually assign each study to a **topic category** and a **tool use type**. This step establishes **inter-rater agreement** (agreement between coders beyond chance).
+A collaborator to double-code a subset of research studies. Together, we will manually assign each study to a **topic category** and a **tool use type**. This step establishes **inter-rater agreement** (agreement between coders beyond chance).
 
 For sampling, I am taking **10% of the full dataset (2,170 studies) = 217 studies**. Sampling will be stratified by tool `tool_name`. The entire 222-study subset will be double-coded.
 
@@ -487,7 +295,7 @@ The final distribution for the double-coded sample is:
 set.seed(2025)
 
 # Load the dataset
-all_tools <- readRDS(here("output", "all_tools.rds")) %>%
+all_tools <- readRDS(here("05_cleaned_datasets", "all_tools.rds")) %>%
   janitor::clean_names() %>%
   mutate(
     year = as.integer(year),
@@ -573,12 +381,12 @@ sample_primary <- all_tools %>%
 stopifnot(nrow(sample_primary) == SAMPLE_TOTAL)
 
 # --------------------------------------------------------------------
-# Save outputs (to output/ folder)
+# Save 05_cleaned_datasetss (to 05_cleaned_datasets/ folder)
 # --------------------------------------------------------------------
 sample_primary %>% count(tool_name) %>% arrange(desc(n)) %>% print()
 
-readr::write_csv(tool_alloc,     here("output", "alloc_with_min_floor.csv"))
-readr::write_csv(sample_primary, here("output", "double_code_sample.csv"))
+readr::write_csv(tool_alloc,     here("05_cleaned_datasets", "alloc_with_min_floor.csv"))
+readr::write_csv(sample_primary, here("05_cleaned_datasets", "double_code_sample.csv"))
 
 ```
 
@@ -601,7 +409,7 @@ tool_use_levels <- c(
   "Applied (used for analysis/targeting)",
   "Evaluated (validated/benchmarked the tool)",
   "Critiqued (limitations/methodological critique)",
-  "Mentioned/Context (not used for analysis)"
+  "Mentioned/Context (used for background)"
 )
 
 codebook <- tibble::tibble(
@@ -614,16 +422,323 @@ codebook <- tibble::tibble(
   examples   = NA_character_    # fill in small examples/keywords
 )
 
-readr::write_csv(codebook, here("output", "codebook_topic_tool_use.csv"))
+readr::write_csv(codebook, here("05_cleaned_datasets", "codebook_topic_tool_use.csv"))
 ```
 
-### Research question 2
+### Inter-rater agreement
+
+Before running the analysis, I’ll import two datasets that my colleagues and I collaborated on. These datasets include our manual categorizations of studies and their publishers.
+
+**1. Study-level data**
+
+-   `all_studies_ira.csv`: A collaborator and I manually categorized publishers for about **10% of the sample**. This dataset is used to calculate **inter-rater agreement (IRA)** and identify where our categorizations differed or aligned.
+-   `all_studies_finalized.csv`: This is the **final dataset** after we reviewed disagreements and reached consensus. We updated the **codebook** accordingly, and applied the final categories to the full dataset. I will use this version for analyzing relevant research questions.
+    -   The corresponding codebook, **`codebook_studies.csv`**, is located in the `codebooks/` folder.
+    -   It defines **four categories** of study classification like applied, mentioned/context, etc. for a total of **10 subcategories.**
+
+**2. Publisher-level data**
+
+-   `all_publishers_ira.csv`: Similar to the studies dataset, a collaborator and I manually categorized about **11% of publishers**. This subset is used to assess IRA.
+-   `all_publishers_finalized.csv`: The **finalized version** after resolving disagreements and updating the codebook. I will use this version for analyzing relevant research questions.
+    -   The corresponding codebook, `codebook_publishers.csv`, is in the `codebooks/` folder.
+    -   It defines **10 publisher types**, ranging from *commercial academic publishers* to *grey literature platforms*.
+
+The first step in this analysis is to calculate **inter-rater agreement (IRA)** at both the study and publisher levels using **Cohen’s kappa**, a statistical measure of rater agreement.
+
+I chose this approach because relying on a single person to categorize studies or publishers can introduce bias. With two collaborators independently code each dataset, I can identify where our classifications **converge** and **diverge**, and quantify that level of agreement.
+
+Cohen’s kappa adjusts for agreement that occurs **by chance** and produces a value between **–1 and +1**, where –1 indicates no agreement and +1 indicates almost perfect agreement. In practice, it functions like a **correlation coefficient** based on a cross-tabulation of each rater’s classifications.
+
+As McHugh (2012) explains, *“the squaring of kappa translates conceptually to the amount of accuracy (i.e., the reverse of error) in the data due to congruence among the data collectors.”*
+
+**Interpretation of Cohen’s kappa** [@mchugh2012]
+
+| Value of Kappa | Level of Agreement | \% of Data that are Reliable |
+|:--------------:|:------------------:|:----------------------------:|
+|     0–.20      |        None        |             0–4%             |
+|    .21–.39     |      Minimal       |            4–15%             |
+|    .40–.59     |        Weak        |            15–35%            |
+|    .60–.79     |      Moderate      |            35–63%            |
+|    .80–.90     |       Strong       |            64–81%            |
+|    Above.90    |   Almost Perfect   |           82–100%            |
+
+A good resource that I'm following for IRA is *Cohen’s Kappa in R: For Two Categorical Variables* [@datanovia2025].
+
+#### **1. Publisher-level data**
+
+Cohen’s κ = 0.89 (95 % CI \[0.79, 0.99\], p \< 0.001) indicates **almost perfect agreement** between the two raters according to McHugh (2012). The raw percent agreement was 91 %, which higlights strong consistency between raters in categorizing publisher types.
+
+Here's how to read the results table:
+
+| Metric | Value | Interpretation |
+|---------------------|------------------|---------------------------------|
+| **Percent agreement** | `0.909` (≈ 91%) | Raw proportion of identical ratings — shows high agreement overall |
+| **Unweighted Cohen’s κ** | `0.8935` | Agreement beyond chance |
+| **Weighted Cohen’s κ** | `0.8602` | Takes into account partial agreement (useful for *ordinal* data — not critical here) |
+| **ASE** (Asymptotic Std. Error) | `0.0505` | Measures uncertainty of κ estimate |
+| **z** | `17.69` | Test statistic for H₀ : κ = 0 (no agreement beyond chance) |
+| **p-value** | `4.78 × 10⁻⁷⁰` | Extremely small → reject H₀; the raters’ agreement is highly significant |
+| **95% CI (Unweighted)** | 0.79 – 0.99 | Even the lower bound (0.79) indicates strong agreement |
+
+**Note on sample size for inter-rater agreement** Although the full dataset (`all_publishers_ira.csv`) contains 387 records, only the first 44 rows were double-coded by both raters (11% of the sample).
+
+The remaining rows include missing or unassigned categories for at least one rater. Because `table()` in R automatically excludes `NA` values when computing cross-tabulations, the Cohen’s Kappa and percent agreement calculations below are effectively based on those 44 complete cases.
+
+So, this code can be reused with any dataset of similar structure without needing to hardcode a row range. The computation will always use only non-missing, valid pairs of rater classifications.
+
+```{r publisher-ira-calculation, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: publisher-ira-calculation
+
+# Import publisher file
+all_publishers_ira <- readr::read_csv(
+  here::here("02_processed_data", "all_publishers_ira.csv"),
+  show_col_types = FALSE,
+  na = c("", "NA", "N/A", "NULL")
+)
+
+# Enforce types
+all_publishers_ira <- all_publishers_ira |>
+  mutate(
+    publisher        = as.character(publisher),
+    n                = as.integer(n),
+    pub_type_rater_1 = as.character(pub_type_rater_1),
+    pub_type_rater_2 = as.character(pub_type_rater_2),
+    description      = as.character(description)
+  )
+
+# Define category levels
+kappa_levels <- c(
+  "Commercial academic publishers",
+  "University presses",
+  "Open access publishers",
+  "Preprint / working paper servers",
+  "Government repositories",
+  "Legal / policy databases",
+  "University / institutional repositories",
+  "Grey literature platforms",
+  "Scholarly society / association publishers",
+  "None/Unknown"
+)
+
+# Apply factor levels
+all_publishers_ira <- all_publishers_ira |>
+  mutate(
+    pub_type_rater_1 = factor(pub_type_rater_1, levels = kappa_levels),
+    pub_type_rater_2 = factor(pub_type_rater_2, levels = kappa_levels)
+  )
+
+# Use to check for the recoding results
+# table(all_publishers_ira$pub_type_rater_1, useNA = "ifany")
+# table(all_publishers_ira$pub_type_rater_2, useNA = "ifany")
+
+# Build contingency table and compute Cohen's Kappa
+# (Unweighted Kappa corresponds to Cohen’s kappa for two raters)
+tab_10x10 <- table(
+  Rater1 = all_publishers_ira$pub_type_rater_1,
+  Rater2 = all_publishers_ira$pub_type_rater_2
+)
+
+kappa_res <- vcd::Kappa(tab_10x10)
+
+kappa_res
+confint(kappa_res)
+
+# Simple percent agreement for context
+percent_agreement <- mean(all_publishers_ira$pub_type_rater_1 == all_publishers_ira$pub_type_rater_2, na.rm = TRUE)
+percent_agreement
+```
+
+#### **2. Study-level data**
+
+```{r studies-ira-calculation, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: studies-ira-calculation
+
+
+# # Packages
+# library(here)
+# library(readr)
+# library(dplyr)
+# library(stringr)
+# library(forcats)
+# library(vcd)
+```
+
+### Research questions
+
+#### Research question 1
+
+I will look at each question one by one and clean the data as I go. I will organize the data during the analysis before exploring the results. I'll also export intermediate results into tidy CSV files so they are ready for further visualization and exploration.
+
+How many research papers or studies have cited or relied on five U.S. federal climate and environmental tools that are threatened, not being maintained, or no longer available?
+
+##### Total number of studies
+
+```{r descriptive-stat-1, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-1
+
+nrow (all_tools)
+
+write_csv(tibble(total_studies = nrow(all_tools)), here("06_viz_ready", "total_studies.csv"))
+```
+
+##### Count of studies per tool
+
+```{r descriptive-stat-2, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-2
+
+df_tool <- all_tools %>%
+  count(tool_name, name = "n_studies") %>%
+  arrange(desc(n_studies))
+
+hchart(df_tool, "column", hcaes(x = tool_name, y = n_studies)) %>%
+  hc_title(text = "Number of studies by tool") %>%
+  hc_subtitle(text = "Total count of research papers citing or relying on each tool") %>%
+  hc_xAxis(title = list(text = "Tool")) %>%
+  hc_yAxis(title = list(text = "Number of studies"), allowDecimals = FALSE) %>%
+  hc_tooltip(pointFormat = "<b>{point.y}</b> studies") %>%
+  hc_legend(enabled = FALSE) %>%
+  hc_exporting(enabled = TRUE)
+
+write_csv(df_tool, here("06_viz_ready", "count_per_tool.csv"))
+```
+
+##### Count of studies per year per tool
+
+```{r descriptive-stat-3, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-3
+
+df_year_tool <- all_tools %>%
+  filter(!is.na(year)) %>%
+  count(tool_name, year, name = "n_studies") %>%
+  arrange(tool_name, year)
+
+hchart(
+  df_year_tool,
+  "line",
+  hcaes(x = year, y = n_studies, group = tool_name)
+) %>%
+  hc_title(text = "Studies over time by tool") %>%
+  hc_subtitle(text = "Annual counts of studies citing or relying on each tool") %>%
+  hc_xAxis(title = list(text = "Year"), allowDecimals = FALSE) %>%
+  hc_yAxis(title = list(text = "Number of studies"), allowDecimals = FALSE) %>%
+  hc_tooltip(shared = TRUE, crosshairs = TRUE,
+             headerFormat = "<b>Year: {point.key}</b><br/>",
+             pointFormat = "{series.name}: <b>{point.y}</b><br/>") %>%
+  hc_legend(title = list(text = "Tool")) %>%
+  hc_exporting(enabled = TRUE)
+
+write_csv(df_year_tool, here("06_viz_ready", "count_per_year_per_tool.csv"))
+```
+
+##### Top 10 most cited studies overall per tool
+
+```{r descriptive-stat-4, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-4
+
+df_top_cites <- all_tools %>%
+  filter(!is.na(cites)) %>%
+  group_by(tool_name) %>%
+  slice_max(order_by = cites, n = 10, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(tool_name, year, title, cites, authors) %>%
+  arrange(tool_name, desc(cites))
+
+# Show table (optional)
+df_top_cites
+
+# Ensure 06_viz_ready/ exists, then export
+if (!dir.exists(here::here("06_viz_ready"))) dir.create(here::here("06_viz_ready"), recursive = TRUE)
+readr::write_csv(df_top_cites, here::here("06_viz_ready", "top10_cites_per_tool.csv"))
+```
+
+##### Top 10 highest `cites_per_year` per tool
+
+This shows which studies are “most cited relative to their age.”
+
+```{r descriptive-stat-5, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-5
+
+df_top_cpy <- all_tools %>%
+  filter(!is.na(cites_per_year)) %>%
+  group_by(tool_name) %>%
+  slice_max(order_by = cites_per_year, n = 10, with_ties = FALSE) %>%
+  ungroup()
+
+df_top_cpy %>% 
+  select(tool_name, year, title, cites_per_year, cites, authors) %>%
+  arrange(tool_name, desc(cites_per_year))
+
+hchart(
+  df_top_cpy,
+  "bar",
+  hcaes(x = reorder(title, cites_per_year), y = cites_per_year, group = tool_name)
+) %>%
+  hc_title(text = "Top 10 studies by cites per year, per tool") %>%
+  hc_subtitle(text = "Highlights studies with the highest relative citation rates") %>%
+  hc_xAxis(title = list(text = "Study title"), labels = list(enabled = FALSE)) %>%  # hide long labels
+  hc_yAxis(title = list(text = "Cites per year")) %>%
+  hc_tooltip(pointFormat = "<b>{point.y}</b> cites/year<br>{point.tool_name}<br>") %>%
+  hc_exporting(enabled = TRUE)
+
+write_csv(df_top_cpy, here("06_viz_ready", "top10_cites_per_year_per_tool.csv"))
+```
+
+##### Average `cites_per_year` over time per tool
+
+This shows whether more recent papers citing a tool are getting traction.
+
+```{r descriptive-stat-6, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-6
+
+df_avg_cpy <- all_tools %>%
+  filter(!is.na(year), !is.na(cites_per_year)) %>%
+  group_by(tool_name, year) %>%
+  summarise(avg_cpy = mean(cites_per_year, na.rm = TRUE), .groups = "drop")
+
+hchart(df_avg_cpy, "line", hcaes(x = year, y = avg_cpy, group = tool_name)) %>%
+  hc_title(text = "Average cites per year over time, by tool") %>%
+  hc_yAxis(title = list(text = "Average cites per year")) %>%
+  hc_exporting(enabled = TRUE)
+
+write_csv(df_avg_cpy, here("06_viz_ready", "avg_cites_per_year_over_time.csv"))
+```
+
+##### Publishers
+
+Which top 10 publishers/platforms appear most frequently?
+
+```{r descriptive-stat-7, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-7
+
+df_10_publishers <- all_tools %>%
+  filter(publisher != "") %>%
+  count(publisher, sort = TRUE) %>%
+  slice_head(n = 10)
+
+df_10_publishers
+
+write_csv(df_10_publishers, here("06_viz_ready", "top_publishers.csv"))
+```
+
+List all publishers from the sample.
+
+```{r descriptive-stat-8, echo = TRUE, message = FALSE, results = 'markup'}
+#| label: descriptive-stat-8
+
+df_all_publishers <- all_tools %>%
+  filter(publisher != "") %>%
+  count(publisher, sort = TRUE)
+
+write_csv(df_all_publishers, here("06_viz_ready", "all_publishers.csv"))
+```
+
+#### Research question 2
 
 What research topics are associated with each tool, and how do these topics vary by citation frequency?
 
 Coming soon!
 
-### Research question 3
+#### Research question 3
 
 In what ways are these tools applied in research?
 
