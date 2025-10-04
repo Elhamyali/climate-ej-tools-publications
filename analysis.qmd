@@ -462,7 +462,7 @@ As McHugh (2012) explains, *“the squaring of kappa translates conceptually to 
 |    .80–.90     |       Strong       |            64–81%            |
 |    Above.90    |   Almost Perfect   |           82–100%            |
 
-A good resource that I'm following for IRA is *Cohen’s Kappa in R: For Two Categorical Variables* [@datanovia2025].
+A good resource that I'm following for IRA is *Cohen’s Kappa in R: For Two Categorical Variables* [@datanovia2025]. Another is the *agreement package:* <https://github.com/jmgirard/agreement>.
 
 #### **1. Publisher-level data**
 
@@ -471,7 +471,7 @@ Cohen’s κ = 0.89 (95 % CI \[0.79, 0.99\], p \< 0.001) indicates **almost perf
 Here's how to read the results table:
 
 | Metric | Value | Interpretation |
-|---------------------|------------------|---------------------------------|
+|---------------------|-------------------|---------------------------------|
 | **Percent agreement** | `0.909` (≈ 91%) | Raw proportion of identical ratings — shows high agreement overall |
 | **Unweighted Cohen’s κ** | `0.8935` | Agreement beyond chance |
 | **Weighted Cohen’s κ** | `0.8602` | Takes into account partial agreement (useful for *ordinal* data — not critical here) |
