@@ -39,25 +39,26 @@ warning: false
 
 ## Background
 
-When public climate & EJ evidence disappears (removed, restricted, or altered), a decade of downstream knowledge becomes harder to verify, reproduce, teach, or apply—especially for communities and decisions that most need it.\
+When public climate & EJ evidence disappears (removed, restricted, or altered), a decade of downstream knowledge becomes harder to verify, reproduce, teach, or apply—especially for communities and decisions that most need it.
+
 This analysis looks at how many studies have used these tools, their topics, and their use cases.
 
 ## Questions
 
 Here are the key questions explored in this analysis:
 
--   How many research papers or studies have cited or relied on five U.S. federal climate and environmental tools that are threatened, not being maintained, or no longer available?\
--   What research topics are associated with each tool, and how do these topics vary by citation frequency?\
+-   How many research papers or studies have cited or relied on five U.S. federal climate and environmental tools that are threatened, not being maintained, or no longer available?
+-   What research topics are associated with each tool, and how do these topics vary by citation frequency?
 -   In what ways are these tools applied in research?
 
 ## Data Sources
 
 The climate tools assessed are:
 
--   CEQ’s **Climate and Economic Justice Screening Tool (CEJST)**\
--   EPA’s **EJScreen**\
--   USDA Forest Service’s **Climate Risk Viewer (CRV)**\
--   FEMA’s **Future Risk Index (FRI)**\
+-   CEQ’s **Climate and Economic Justice Screening Tool (CEJST)**
+-   EPA’s **EJScreen**
+-   USDA Forest Service’s **Climate Risk Viewer (CRV)**
+-   FEMA’s **Future Risk Index (FRI)**
 -   CDC’s **Environmental Justice Index (EJI)**
 
 The data for this project comes from Google scholar and last refreshed on August 29, 2025.
@@ -78,7 +79,7 @@ library(here)
 library(ezknitr)
 
 ## Data import & cleaning
-library(tidyverse)  # includes dplyr, purrr, readr, tidyr, stringr, etc.
+library(tidyverse) 
 library(janitor)
 library(lubridate)
 library(janitor)
@@ -263,6 +264,26 @@ write_csv(all_tools, here("output", "all_tools.csv"))
 
 ## Analysis
 
+Before running the analysis, I’ll import two datasets that my colleagues and I collaborated on. These datasets include our manual categorizations of studies and their publishers.
+
+**1. Study-level data**
+
+-   `all_studies_ira.csv`: A collaborator and I manually categorized publishers for about **10% of the sample**. This dataset is used to calculate **inter-rater agreement (IRA)** and identify where our categorizations differed or aligned.
+-   `all_studies_finalized.csv`: This is the **final dataset** after we reviewed disagreements and reached consensus. We updated the **codebook** accordingly, and applied the final categories to the full dataset.
+    -   The corresponding codebook, **`codebook_studies.csv`**, is located in the `codebooks/` folder.
+    -   It defines **four categories** of study classification like applied, mentioned/context, etc. for a total of **10 subcategories.**
+
+**2. Publisher-level data**
+
+-   `all_publishers_ira.csv`: Similar to the studies dataset, a collaborator and I manually categorized about **11% of publishers**. This subset is used to assess IRA.
+-   `all_publishers_finalized.csv`: The **finalized version** after resolving disagreements and updating the codebook.
+    -   The corresponding codebook, `codebook_publishers.csv`, is in the `codebooks/` folder.
+    -   It defines **10 publisher types**, ranging from *commercial academic publishers* to *grey literature platforms*.
+
+### Inter-rater agreement
+
+Before, I analyze the datasets for all studies and publishers, I will calculate the inter
+
 I will look at each question one by one and clean the data as I go. I will organize the data during the analysis before exploring the results. I'll also export intermediate results into tidy CSV files so they are ready for further visualization and exploration.
 
 ### Research question 1
@@ -429,7 +450,6 @@ df_all_publishers <- all_tools %>%
 
 write_csv(df_all_publishers, here("viz", "all_publishers.csv"))
 ```
-
 
 #### Stratified random sampling & inter-rater agreement
 
