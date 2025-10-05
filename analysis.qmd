@@ -6,10 +6,9 @@ author:
     roles:
       - Researcher
       - Data Storytelling
-      - Human-centered Design
       - Data Visualization
     affiliations:
-      - Public Environmental Data Project
+      - Public Environmental Data Project (PEDP)
 license: CC BY-SA 4.0
 keywords:
   - climate change
@@ -38,21 +37,21 @@ warning: false
 
 ## Background
 
-When public climate & EJ evidence disappears (removed, restricted, or altered), a decade of downstream knowledge becomes harder to verify, reproduce, teach, or apply—especially for communities and decisions that most need it.
+When public climate and environmental justice (EJ) evidence is removed, restricted, or altered, a decade of downstream knowledge becomes harder to verify, reproduce, teach, or apply—especially for the communities and decisions that most need it.
 
-This analysis looks at how many studies have used these tools, their topics, and their use cases.
+This analysis explores how research studies have used five U.S. federal climate and EJ tools, including their topics and use cases.
 
-## Questions
+## Research Questions
 
-Here are the key questions explored in this analysis:
+This analysis focuses on three main questions:
 
--   How many research papers or studies have cited or relied on five U.S. federal climate and environmental tools that are threatened, not being maintained, or no longer available?
--   What research topics are associated with each tool, and how do these topics vary by citation frequency?
--   In what ways are these tools applied in research?
+-   How many research papers or studies have cited or relied on the five U.S. federal climate and environmental justice tools that are threatened, not being maintained, or no longer publicly available?
+-   What types of research topics occur most frequently overall and within each tool, and how do these topics vary by citation frequency?
+-   In what ways are these tools used in research studies overall and within each tool, and how does their use vary by citation frequency?
 
 ## Data Sources
 
-The climate tools assessed are:
+The climate and EJ tools assessed are:
 
 -   CEQ’s **Climate and Economic Justice Screening Tool (CEJST)**
 -   EPA’s **EJScreen**
@@ -60,13 +59,13 @@ The climate tools assessed are:
 -   FEMA’s **Future Risk Index (FRI)**
 -   CDC’s **Environmental Justice Index (EJI)**
 
-The data for this project comes from Google scholar and last refreshed on September 15, 2025.
+All data were collected from **Google Scholar** and last refreshed on **September 15, 2025**.
 
-Original raw datasets are saved in the `01_raw_data/` folder. This script reduces and cleans those datasets to prepare them for analysis.
+Raw datasets are stored in the `01_raw_data/` folder. This script cleans and merges them into analysis-ready datasets.
 
 ## Cleaning
 
-I start by loading the packages needed for file handling, data wrangling, and visualization.
+I first load all required packages for data handling, cleaning, and visualization.
 
 ```{r load-libraries, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: load-libraries
@@ -95,7 +94,9 @@ library(gt)
 
 ### Import raw data
 
-I import all .csv files from the `01_raw_data/` folder, then save them as .rds files into `05_cleaned_datasets/`. This preserves their structure and speeds up future reads.
+All `.csv` files from the `01_raw_data/` folder are imported and saved as `.rds` files in `05_cleaned_datasets/`.
+
+Saving as `.rds` helps preserve structure and improves loading speed later.
 
 ```{r import-data, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: import-data
@@ -117,9 +118,9 @@ walk2(
 
 ### Merge EJScreen datasets
 
-Google Scholar caps search results at 1,000 records [@harzing2025].
+Google Scholar limits exports to 1,000 records per search [@harzing2025].\
 
-Because EJScreen returned more than this, I split the results into four files (ejscreen_1–ejscreen_4). Here I combine them into one dataframe.
+Because EJScreen returned more than this, I split it into four parts (`ejscreen_1`–`ejscreen_4`). Here, I merge them into a single dataframe.
 
 ```{r ejscreen-cleaning, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: ejscreen-cleaning
@@ -145,11 +146,11 @@ dim(ejscreen_all)
 
 ### Clean and tag all other tools
 
-I apply the same cleaning process to the other tools (CEJST, CRV, EJI, FRI):
+I apply the same process to the other tools—CEJST, CRV, EJI, and FRI—to ensure consistency. Each dataset is:
 
--   Standardize variable names to snake_case
--   Add a source_file column for provenance
--   Guess variable types (integers, doubles, dates, etc.)
+-   Standardized to `snake_case` column names
+-   Tagged with its source file and tool name
+-   Type-converted for appropriate variable formats
 
 ```{r remaining-tools-cleaning, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: remaining-tools-cleaning
@@ -188,11 +189,13 @@ other_list <- other_paths |>
 
 ### Final merge and labeling
 
-I now merge all tools into a single dataset. Additional steps:
+Finally, I merge all tools into one dataset and standardize metadata. Steps include:
 
--   Ensure consistent date formats
--   Map tool codes (ejscreen, cejst, etc.) to their full names
--   Drop empty placeholder columns
+-   Harmonizing date formats
+
+-   Mapping tool codes (e.g., `ejscreen`) to their full names
+
+-   Dropping empty or placeholder columns
 
 ```{r final-cleaning, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: final-cleaning
@@ -259,35 +262,35 @@ write_csv(all_tools, here("05_cleaned_datasets", "all_tools.csv"))
 
 ### Stratified random sampling
 
-A collaborator to double-code a subset of research studies. Together, we will manually assign each study to a **topic category** and a **tool use type**. This step establishes **inter-rater agreement** (agreement between coders beyond chance).
+For sampling, I selected **10% of the full dataset** collected in **August 2025** (prior to the September 15 refresh, which was a slightly bigger sample). The total number of studies from our September refresh was 2,212.
 
-For sampling, I am taking **10% of the full dataset (2,170 studies) = 217 studies**. Sampling will be stratified by tool `tool_name`. The entire 222-study subset will be double-coded.
+-   **Studies dataset:** 2,170 total → 217 sampled
 
-A helpful guide is *Stratified Sampling in R: A Practical Guide with Base R and dplyr* [@sanderson2024].
+-   **Publishers dataset:** 387 total → 40 sampled
+
+Sampling was **stratified by `tool_name`** to ensure each tool was proportionally represented in the study sample. Both the **study** and **publisher** subsets were then **double-coded** to calculate inter-rater agreement (IRA).
+
+For the **publishers**, we used a simple random sample generated in Excel rather than R.
+
+A helpful reference for this approach is *“Stratified Sampling in R: A Practical Guide with Base R and dplyr”* [@sanderson2024].
+
+The code below shows the stratified sampling method used for the **studies dataset** only.
 
 I considered two allocation approaches:
 
-1.  **Proportional-only allocation** (222 total).
+1.  **Proportional-only allocation** (222 total). Each tool receives a number of samples proportional to its share of the full dataset. This preserves representativeness, but smaller tools (e.g., CRV and FRI) end up with too few studies to analyze meaningfully
 
-    -   Each tool receives samples proportional to its share of the corpus.
+2.  **Proportional with a minimum floor** (222 total, MIN = 10). Every tool receives at least **10 studies** (or all available if fewer exist). Larger tools such as **EJScreen** and **CEJST** contribute slightly fewer cases to make room for smaller tools.
 
-    -   This preserves representativeness but leaves small tools (e.g., CRV, FRI) with too few cases to analyze.
-
-2.  **Proportional with a minimum floor** (222 total, MIN = 10).
-
-    -   Every tool gets at least 10 studies (or all available, if fewer).
-
-    -   Larger tools (EJScreen, CEJST) give up a small number of cases to make room.
-
-I chose the **minimum floor approach**, since it ensures smaller tools are represented enough for meaningful analysis and coder agreement checks.
+I chose the **minimum floor approach** because it ensures that smaller tools are sufficiently represented for meaningful analysis and coder agreement checks.
 
 **Tradeoff:**
 
--   *Proportional-only*: best if the goal is a population-level snapshot but leaves tiny strata nearly invisible.
+-   *Proportional-only*: best for a population-level snapshot but leaves small strata nearly invisible.
 
--   *Floor allocation*: best if we need to compare across tools.
+-   *Floor allocation*: best for balanced comparisons across tools.
 
-The final distribution for the double-coded sample is:
+The final distribution of the **double-coded sample** is shown below:
 
 ```{r}
 set.seed(2025)
@@ -388,7 +391,7 @@ readr::write_csv(sample_primary, here("05_cleaned_datasets", "double_code_sample
 
 ```
 
-To support manual coding, I drafted an early codebook with candidate topic and tool use categories. Definitions, inclusion/exclusion criteria, and examples will be added as the coding scheme is refined.
+To support manual coding, I created an initial **codebook** with draft topic and tool-use categories. I’ll continue refining it by adding clear **definitions**, **inclusion and exclusion criteria**, and **examples** as the coding scheme develops.
 
 ```{r}
 # Starter codebook for manual coding
@@ -469,7 +472,7 @@ Cohen’s κ = 0.89 (95 % CI \[0.79, 0.99\], p \< 0.001) indicates **almost perf
 Here's how to read the results table:
 
 | Metric | Value | Interpretation |
-|---------------------|-------------------|---------------------------------|
+|---------------------|-------------------|--------------------------------|
 | **Percent agreement** | `0.909` (≈ 91%) | Raw proportion of identical ratings — shows high agreement overall |
 | **Unweighted Cohen’s κ** | `0.8935` | Agreement beyond chance |
 | **Weighted Cohen’s κ** | `0.8602` | Takes into account partial agreement (useful for *ordinal* data — not critical here) |
@@ -661,7 +664,7 @@ summary_tbl
 
 ### Research questions
 
-Before we analyze each question, I'll merge the publishers and all studies datasets
+Before analyzing each research question, I will merge the publisher and study datasets.
 
 ```{r final-datasets-cleanup-merge, echo = TRUE, message = FALSE, results = 'markup'}
 #| label: final-datasets-cleanup-merge
@@ -720,6 +723,14 @@ all_studies_merged <- all_studies_finalized %>%
     publisher_description = as.character(publisher_description)
   )
 
+# # Remove studies with "None" categories studies in the tool_use_type variable because we are not analyzing studies that Study unrelated to the tool (false positive in search) or not in English. Refer to codebook_studies in the 03_codebooks folder for more information on the category definitions
+
+# Remove studies with "None" tool_use_type (per codebook)
+# Exclude false positives / not-in-scope studies (See 03_codebooks/codebook_studies.* for definitions)
+all_studies_merged <- all_studies_merged %>%
+  mutate(tool_use_type = as.character(tool_use_type)) %>%
+  filter(!is.na(tool_use_type), str_trim(tool_use_type) != "None")
+
 # Save merged dataset
 readr::write_csv(all_studies_merged, file.path("05_cleaned_datasets", "all_studies_merged.csv"))
 saveRDS(all_studies_merged, file.path("05_cleaned_datasets", "all_studies_merged.rds"))
@@ -728,9 +739,9 @@ readr::write_csv(all_studies_merged, file.path(out_viz, "all_studies_merged.csv"
 
 #### Research question 1
 
-I will look at each question one by one and clean the data as I go. I will organize the data during the analysis before exploring the results. I'll also export intermediate results into tidy CSV files so they are ready for further visualization and exploration.
+*How many research papers or studies have cited or relied on the five U.S. federal climate and environmental justice tools that are threatened, not being maintained, or no longer publicly available?*
 
-How many research papers or studies have cited or relied on five U.S. federal climate and environmental tools that are threatened, not being maintained, or no longer available?
+I will address each research question sequentially, cleaning and organizing the data throughout the analysis process. During this stage, I will prepare the data for exploration and export intermediate results as tidy CSV files for visualization and further analysis.
 
 ##### Total number of studies
 
@@ -895,12 +906,30 @@ write_csv(df_all_publishers, here("06_viz_ready", "all_publishers.csv"))
 
 #### Research question 2
 
-What research topics are associated with each tool, and how do these topics vary by citation frequency?
+*What types of research topics occur most frequently overall and within each tool, and how do these topics vary by citation frequency?*
 
-Coming soon!
+For this analysis, I’ll use the combined dataset **`all_studies_merged.csv`**. This file already contains all the information I need to explore how research topics align with specific tools and how often each study is cited.
+
+The plan is to create a **bubble chart** to visualize the relationship between:
+
+-   The *tool name* (x-axis),
+
+-   The *research topic category* (y-axis), and
+
+-   The *citation frequency* (bubble size).
+
+No additional CSVs are needed for this step.
 
 #### Research question 3
 
-In what ways are these tools applied in research?
+*In what ways are these tools used in research studies overall and within each tool, and how does their use vary by citation frequency?*
 
-Coming soon!
+This analysis follows the **same logic as Question 2**, using the **`all_studies_merged.csv`** dataset. Here, I’ll focus on categorizing how tools are *applied, mentioned, evaluated, and critiqued*.
+
+## Next Step
+
+And voilà! That completes the analysis portion 🎉
+
+Next, I’ll take the cleaned CSVs exported in the **`06_viz_ready/`** folder and **`all_studies_merged.csv`** to move into the visualization stage. While I often use **{highcharter}** and **Apache ECharts**, I’ll likely use **Flourish** for this project so that my team at **PEDP** can easily update the visualizations if new data is added later.
+
+Flourish is a great **low-code/no-code tool**, which perfect for quick collaboration and accessible storytelling.

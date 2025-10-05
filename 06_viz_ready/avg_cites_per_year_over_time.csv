@@ -1,24 +1,21 @@
 tool_name,year,avg_cpy
-Climate Risk Viewer,2023,2.6666666666666665
-Climate Risk Viewer,2024,20
-Climate Risk Viewer,2025,1.75
-Climate and Economic Justice Screening Tool (CEJST),2022,1.8464
-Climate and Economic Justice Screening Tool (CEJST),2023,2.139593908629441
-Climate and Economic Justice Screening Tool (CEJST),2024,2.5280528052805287
-Climate and Economic Justice Screening Tool (CEJST),2025,0.7826086956521734
-EJScreen,2016,0.46142857142857147
+Climate Risk Viewer,2025,0
+Climate and Economic Justice Screening Tool (CEJST),2022,1.906067415730337
+Climate and Economic Justice Screening Tool (CEJST),2023,2.2905027932960893
+Climate and Economic Justice Screening Tool (CEJST),2024,2.3874538745387452
+Climate and Economic Justice Screening Tool (CEJST),2025,0.8391608391608385
+EJScreen,2016,0.5383333333333333
 EJScreen,2017,0.38
-EJScreen,2018,2.1014285714285714
+EJScreen,2018,2.4516666666666667
 EJScreen,2019,5.806666666666667
-EJScreen,2020,1.9200000000000002
-EJScreen,2021,1.1810344827586206
-EJScreen,2022,2.38410909090909
-EJScreen,2023,2.42542372881356
-EJScreen,2024,1.947368421052632
-EJScreen,2025,0.5918367346938772
+EJScreen,2020,2.1333333333333337
+EJScreen,2021,1.2600000000000002
+EJScreen,2022,2.210245901639344
+EJScreen,2023,2.4748858447488584
+EJScreen,2024,2.086776859504132
+EJScreen,2025,0.5350318471337577
 Environmental Justice Index (EJI),2022,1.67
-Environmental Justice Index (EJI),2023,1.7857142857142858
-Environmental Justice Index (EJI),2024,2.745098039215686
-Environmental Justice Index (EJI),2025,0.2978723404255319
-Future Risk Index (FRI),2024,1.6666666666666665
-Future Risk Index (FRI),2025,1
+Environmental Justice Index (EJI),2023,1.6666666666666665
+Environmental Justice Index (EJI),2024,2.7800000000000002
+Environmental Justice Index (EJI),2025,0.29787234042553185
+Future Risk Index (FRI),2024,1
