@@ -1,6 +1,21 @@
-.Rproj.user
+# macOS system files
+.DS_Store
+
+# R project files
 .Rhistory
 .RData
 .Ruserdata
-
+.Rproj.user/
 /.quarto/
+
+# Quarto and R Markdown caches
+.Rcache/
+_cache/
+*_cache/
+*.utf8.md
+*.knit.md
+
+# Temporary and backup files
+*.tmp
+*.bak
+*~
